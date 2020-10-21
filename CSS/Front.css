@@ -1,0 +1,51 @@
+html, body {
+	height: 100%;
+	background-image: url("../IMG/schneider_cs_city_above.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+body {
+	display: -ms-flexbox;
+	display: flex;
+	color: #fff;
+	text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+}
+
+.cover-container {
+	max-width: 49rem;
+}
+
+.welcome {
+	padding-top: 8rem;
+	padding-bottom: 15rem;
+}
+
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+}
+
+.btn-lg {
+	font-size: 25px;
+	padding: 1rem 1.5rem;
+	font-weight: 700;
+	margin: 1rem .5rem;
+}
+
+.modal-title {
+	color: #333;
+}
+
+.mastfoot {
+	color: rgba(255, 255, 255, .5);
+}
+
+.modal {
+	color: #333; 
+}
