@@ -1,5 +1,5 @@
 <?php 
-	include 'db_login.php';
+	require 'db_login.php';
 
     
     $query = "SELECT * FROM kartu";
