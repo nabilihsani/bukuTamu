@@ -10,7 +10,7 @@
     $numRow = $result->num_rows;
     while ($row = mysqli_fetch_array($result)) {
     	echo '<tr>';
-    	echo '<td>'.$row['Code'].'</td>';
+        print_r('<td>'.$row['Code'].'</td>');
     	echo '<td>'.$row['id'].'</td>';
         echo '<td>'.$row['status'].'</td>';
     	echo '</tr>';
