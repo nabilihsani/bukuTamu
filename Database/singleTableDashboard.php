@@ -1,9 +1,6 @@
 <?php 
-	require_once('db_login.php');
-    $db = new mysqli($db_host, $db_username, $db_password, $db_database);
-    if ($db->connect_errno) {
-    	die ("Could not connect to the database: <br />"). $db->connect_errno;
-    }
+	    include 'db_login.php';
+
     
     $query = "SELECT b.*, a.Nama, a.Email, a.Phone, a.Company, a.Lokasi FROM kunjungan AS b INNER JOIN tamu AS a ON a.idTamu = b.idTamu WHERE DATE(Masuk) = CURDATE() OR Status = 'Active' OR Status = 'Booking'";
     $result = $db->query($query);
