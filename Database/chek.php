@@ -43,9 +43,7 @@
   }
 
   if (isset($_POST["verifyIn"])) {
-    if (empty($idIn)) {
-      $idIn = testInput($_POST['inputIdIn']);
-    }
+    $idIn = testInput($_POST['inputIdIn']);
     $query = "SELECT * FROM kunjungan AS b INNER JOIN tamu AS a ON a.idTamu = b.idTamu WHERE b.idTamu = '$idIn' AND b.Status = 'Booking'";
     $result = $db->query($query);
     $numRow = $result->num_rows;
