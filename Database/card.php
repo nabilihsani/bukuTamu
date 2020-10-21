@@ -1,6 +1,6 @@
 <?php 
 	require_once('db_login.php');
-	include("db_login.php");
+	include "db_login.php";
 
     
     $query = "SELECT * FROM kartu";
