@@ -137,7 +137,9 @@
   }
 
   if (isset($_POST["submitOutY"])) {
-    $idOutY = testInput($_POST['inputIdOutY']);
+    if (empty($idIn)) {
+      $idOutY = testInput($_POST['inputIdOutY']);
+    }
     $q1 = "SELECT * FROM kunjungan WHERE idTamu = '$idOutY'";
     $r1 = $db->query($q1);
     $numRow = $r1->num_rows;
