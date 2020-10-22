@@ -4,15 +4,15 @@
     $result = $db->query($query);
     $numRow = $result->num_rows;
     while ($row = mysqli_fetch_array($result)) {
-        $a = $row['Code'];
-        $b = $row['id'];
-        $c = $row['status'];
+        $a = $db->escape_string($row['Code']);
+        $b = $db->escape_string($row['id']);
+        $c = $db->escape_string($row['status']);
  ?>
 <?=
     '</tr>
-    <td>'.$db->escape_string($a).'</td>
-    <td>'.$db->escape_string($b).'</td>
-    <td>'.$db->escape_string($c).'</td>
+    <td>'.$a.'</td>
+    <td>'.$b.'</td>
+    <td>'.$c.'</td>
     </tr>'
  ?>
 <?php 
