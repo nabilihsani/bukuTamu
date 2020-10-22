@@ -157,10 +157,10 @@ ZeroClipboard_TableTools.Client.prototype = {
 	sized: false,
 	sheetName: '', // default sheet name for excel export
 
-	glue: function({elem, title}) {
+	glue: function(elem, title) {
 		// glue to DOM element
 		// elem can be ID or actual DOM element object
-		this.domElement = ZeroClipboard_TableTools.$({elem});
+		this.domElement = ZeroClipboard_TableTools.$(elem);
 
 		// float just above object, or zIndex 99 if dom element isn't set
 		var zIndex = 99;
