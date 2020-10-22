@@ -4,12 +4,15 @@
     $result = $db->query($query);
     $numRow = $result->num_rows;
     while ($row = mysqli_fetch_array($result)) {
+        $a = $row['Code'];
+        $b = $row['id'];
+        $c = $row['status'];
  ?>
 <?=
     '</tr>
-    <td>'.$row['Code'].'</td>
-    <td>'.$row['id'].'</td>
-    <td>'.$row['status'].'</td>
+    <td>'.$a.'</td>
+    <td>'.$b.'</td>
+    <td>'.$c.'</td>
     </tr>'
  ?>
 <?php 
