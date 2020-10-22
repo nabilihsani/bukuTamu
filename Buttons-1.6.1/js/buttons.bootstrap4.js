@@ -9,7 +9,7 @@
 			return factory( $, window, document );
 		} );
 	}
-	else if ( typeof exports === 'object' ) {
+	else if ( typeof exports === "object" ) {
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
