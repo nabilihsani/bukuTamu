@@ -41,7 +41,7 @@ $.extend( DataTable.ext.buttons, {
 	// A collection of column visibility buttons
 	colvis: function ( dt, conf ) {
 		return {
-			extend: 'collection',
+			extend: "collection",
 			text: function ( dt ) {
 				return dt.i18n( 'buttons.colvis', 'Column visibility' );
 			},
@@ -108,7 +108,7 @@ $.extend( DataTable.ext.buttons, {
 		},
 		init: function ( dt, button, conf ) {
 			var that = this;
-			button.attr( 'data-cv-idx', conf.columns );
+			button.attr( "data-cv-idx", conf.columns );
 
 			dt
 				.on( 'column-visibility.dt'+conf.namespace, function (e, settings) {
