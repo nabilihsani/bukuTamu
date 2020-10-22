@@ -6,11 +6,11 @@
     $result = $db->query($query);
     $numRow = $result->num_rows;
     while ($row = mysqli_fetch_array($result)) {
-    	echo '<tr>';
+        print_r('</tr>');
         print_r('<td>'.$row['Code'].'</td>');
     	print_r('<td>'.$row['id'].'</td>');
         print_r('<td>'.$row['status'].'</td>');
-    	echo '</tr>';
+    	print_r('</tr>');
     }
 
     $db->close();
