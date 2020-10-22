@@ -1,6 +1,5 @@
 <?php 
-	    include 'db_login.php';
-
+    include 'db_login.php';
 
     $query = "SELECT b.*, a.grupName, a.Company, a.Lokasi FROM grupvisit AS b INNER JOIN grup AS a ON a.grupId = b.grupId WHERE DATE(Masuk) = CURDATE() OR Status = 'Active' OR Status = 'Booking'";
     $result = $db->query($query);
@@ -34,26 +33,31 @@
         } else {
             $loc = '-';
         }
-    	echo '<tr>';
-    	echo '<td class="d-none">'.$row['visitId'].'</td>';
-    	if ($row['Status'] == 'Booking') {
-            echo '<td>'.$row['grupId'].' (Booking)</td>';
-        } else {
-            echo '<td>'.$row['grupId'].'</td>';
-        }
-    
-        echo '<td>'.$code.'</td>';
-    	echo '<td>'.$row['grupName'].'</td>';
-        echo '<td>'.$telp.'</td>';
-    	echo '<td>'.$row['Company'].'</td>';
-        echo '<td>'.$loc.'</td>';  
-    	echo '<td>'.$row['visitCount'].'</td>';
-    	echo '<td>'.$row['Tujuan'].'</td>';
-    	echo '<td>'.$row['Keperluan'].'</td>';
-    	echo '<td>'.$dateIn1.'</td>';
-    	echo '<td>'.$dateOut1.'</td>';
-        if ($row['Status'] == 'Booking') {
-            echo '<td><div class="dropdown show">
+ ?>
+    <?= 
+        '<tr>
+        <td class="d-none">'.$row['visitId'].'</td>'
+     ?>
+    <?php if ($row['Status'] == 'Booking') { ?>
+            <?= '<td>'.$row['grupId'].' (Booking)</td>' ?>
+        <?php } else { ?>
+            <?= '<td>'.$row['grupId'].'</td>' ?>
+        <?php } ?>
+    <?=
+        '<td>'.$code.'</td>
+    	<td>'.$row['grupName'].'</td>
+        <td>'.$telp.'</td>
+    	<td>'.$row['Company'].'</td>
+        <td>'.$loc.'</td>
+    	<td>'.$row['visitCount'].'</td>
+    	<td>'.$row['Tujuan'].'</td>
+    	<td>'.$row['Keperluan'].'</td>
+    	<td>'.$dateIn1.'</td>
+    	<td>'.$dateOut1.'</td>'
+     ?>
+     <?php if ($row['Status'] == 'Booking') { ?>
+        <?=
+            '<td><div class="dropdown show">
                     <a class="btn btn-success dropdown-toggle text-white" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
                     </a>
@@ -61,10 +65,14 @@
                         <a class="dropdown-item" data-toggle="modal" data-target="#inModalG" href="#">Check In</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#DelModalG" href="#">Delete</a>
                     </div>
-                </div>';
+                </div>'
+         ?>
+        <?php 
         } else {
             if ($row['Code'] != '') {
-                echo '<td><div class="dropdown show">
+         ?> 
+            <?=
+                '<td><div class="dropdown show">
                     <a class="btn btn-success dropdown-toggle text-white" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
                     </a>
@@ -73,22 +81,30 @@
                         <a class="dropdown-item" data-toggle="modal" data-target="#OutModalG" href="#">Check Out</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#DelModalG" href="#">Delete</a>
                     </div>
-                </div>';
-            } else {
-            echo '<td><div class="dropdown show">
-                    <a class="btn btn-success dropdown-toggle text-white" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </div>'
+            ?>
+            <?php 
+                } else {
+             ?>
+                <?=
+                    '<td><div class="dropdown show">
+                        <a class="btn btn-success dropdown-toggle text-white" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" data-toggle="modal" data-target="#codeModalG" href="#">Input Card</a>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#OutModalG" href="#">Check Out</a>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#DelModalG" href="#">Delete</a>
-                    </div>
-                </div>';
-
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" data-toggle="modal" data-target="#codeModalG" href="#">Input Card</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#OutModalG" href="#">Check Out</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#DelModalG" href="#">Delete</a>
+                        </div>
+                    </div>'
+                 ?>
+            <?php 
+                }
             }
-        }
-        echo '</tr>';
+             ?>
+            
+        <?= '</tr>' ?>
+<?php 
     }
     // function testInput($data) {
     //     $data = trim($data);
@@ -111,14 +127,18 @@
             $query1 = "UPDATE kartu SET id = (SELECT grupId FROM grupvisit WHERE visitId = '$code2'), status = 'Unavailable' WHERE Code = '$code1'";
             $result = $db->query($query);
             $result1 = $db->query($query1);
-            echo "<script type='text/javascript'>
+?>
+        <?=
+             "<script type='text/javascript'>
             $(document).ready(function() {
             $('#codeModal').modal('hide');
             });
-            </script>";
-            echo "<meta http-equiv='refresh' content='0'>";        
-        } else {
-            echo "<script type='text/javascript'>alert('Wrong Access Card, Please Enter The Correct Access Card!');</script>";
+            </script>
+            <meta http-equiv='refresh' content='0'>"
+         ?>
+        <?php } else { ?>
+            <?= "<script type='text/javascript'>alert('Wrong Access Card, Please Enter The Correct Access Card!');</script>" ?>
+<?php        
         }
     }
     if (isset($_POST["submitOutG"])) {
@@ -128,28 +148,34 @@
         $result2 = $db->query($query2);
         $query = "DELETE FROM grup WHERE grupId = '$code1'";
         $result = $db->query($query);
-            echo "<script type='text/javascript'>
+ ?>
+        <?=
+            "<script type='text/javascript'>
             $(document).ready(function() {
             $('#DelModalS').modal('hide');
             });
-            </script>";
-            echo "<meta http-equiv='refresh' content='0'>";
+            </script>
+            <meta http-equiv='refresh' content='0'>"
+         ?>
+<?php
     }
-
     if (isset($_POST["submitOutG"])) {
         $code2 = testInput($_POST['staticCodeOutG']);
         $query2 = "UPDATE grupvisit SET Keluar = CURRENT_TIMESTAMP(), Code = NULL, Status = 'Passive' WHERE visitId = '$code2'";
         $query1 = "UPDATE kartu SET id =  '-', status = 'Available' WHERE Code = (SELECT Code FROM grupvisit WHERE visitId = '$code2')";
         $result = $db->query($query1);
         $result2 = $db->query($query2);
-            echo "<script type='text/javascript'>
+ ?>
+        <?=
+            "<script type='text/javascript'>
             $(document).ready(function() {
             $('#OutModalS').modal('hide');
             });
-            </script>";
-            echo "<meta http-equiv='refresh' content='0'>";
+            </script>
+            <meta http-equiv='refresh' content='0'>"
+         ?>
+<?php         
     }
-
     if (isset($_POST["submitInG"])) {
         $code2 = testInput($_POST['staticCodeInG2']);
         $code1 = testInput($_POST['inputCodeInG']);
@@ -164,14 +190,18 @@
             $query1 = "UPDATE kartu SET id =  (SELECT grupId FROM grupvisit WHERE visitId = '$code2'), status = 'Unavailable' WHERE Code = '$code1'";
             $result = $db->query($query);
             $result1 = $db->query($query1);
-            echo "<script type='text/javascript'>
+ ?>
+        <?=    
+            "<script type='text/javascript'>
             $(document).ready(function() {
             $('#inModalG').modal('hide');
             });
-            </script>";
-            echo "<meta http-equiv='refresh' content='0'>";
-        } else {
-            echo "<script type='text/javascript'>alert('Wrong Access Card, Please Enter The Correct Access Card!');</script>";
+            </script>
+            <meta http-equiv='refresh' content='0'>";
+        ?>
+        <?php } else { ?>
+            <?= "<script type='text/javascript'>alert('Wrong Access Card, Please Enter The Correct Access Card!');</script>" ?>
+<?php        
         }
     }
 
