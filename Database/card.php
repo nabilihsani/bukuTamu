@@ -10,9 +10,9 @@
  ?>
 <?=
     '</tr>
-    <td>'.addslashes($a).'</td>
-    <td>'.addslashes($b).'</td>
-    <td>'.addslashes($c).'</td>
+    <td>'.$db->escape_string($a).'</td>
+    <td>'.$db->escape_string($b).'</td>
+    <td>'.$db->escape_string($c).'</td>
     </tr>'
  ?>
 <?php 
