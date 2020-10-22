@@ -94,8 +94,8 @@
         $data = htmlspecialchars($data);
         return $data;
     }
-
-    if (isset($_POST["submitCode"])) {
+    $a = filter_input(INPUT_POST, 'submitCode');
+    if (isset($a)) {
       	$code2 = filter_input(INPUT_POST, 'staticCodeIn');
 	$code1 = filter_input(INPUT_POST, 'inputCode');
         $query2 = "SELECT * FROM kartu WHERE Code = '$code1'";
@@ -119,10 +119,10 @@
             echo "<script type='text/javascript'>alert('Wrong Access Card, Please Enter The Correct Access Card!');</script>";
         }
     }
-
-    if (isset($_POST["submitDelS"])) {
-        $code2 = testInput($_POST['staticCodeS']);
-        $code1 = testInput($_POST['staticCodeS1']);
+    $a = filter_input(INPUT_POST, 'submitDelS');
+    if (isset($a)) {
+        $code2 = filter_input(INPUT_POST, 'staticCodeS');
+        $code1 = filter_input(INPUT_POST, 'staticCodeS1');
         $query2 = "DELETE FROM kunjungan WHERE idKunjungan = '$code2'";
         $result2 = $db->query($query2);
         $query = "DELETE FROM tamu WHERE idTamu = '$code1'";
@@ -134,9 +134,9 @@
             </script>";
             echo "<meta http-equiv='refresh' content='0'>";
     }     
-    
-    if (isset($_POST["submitOutS"])) {
-        $code2 = testInput($_POST['staticCodeOutS']);
+    $a = filter_input(INPUT_POST, 'submitOutS');
+    if (isset($a)) {
+        $code2 = filter_input(INPUT_POST, 'staticCodeOutS');
         $query2 = "UPDATE kunjungan SET Keluar = CURRENT_TIMESTAMP(), Code = NULL, Status = 'Passive' WHERE idKunjungan = '$code2'";
         $query1 = "UPDATE kartu SET id =  '-', status = 'Available' WHERE Code = (SELECT Code FROM kunjungan WHERE idKunjungan = '$code2')";
         $result = $db->query($query1);
@@ -148,10 +148,10 @@
             </script>";
             echo "<meta http-equiv='refresh' content='0'>";
     }    
-
-    if (isset($_POST["submitInS"])) {
-        $code2 = testInput($_POST['staticCodeInS']);
-        $code1 = testInput($_POST['inputCodeIn']);
+    $a = filter_input(INPUT_POST, 'submitInS');
+    if (isset($a)) {
+        $code2 = filter_input(INPUT_POST, 'staticCodeInS');
+        $code1 = filter_input(INPUT_POST, 'inputCodeIn');
         $query3 = "SELECT * FROM kartu WHERE Code = '$code1'";
         $result3 = $db->query($query3);
         $numRow = $result3->num_rows;
