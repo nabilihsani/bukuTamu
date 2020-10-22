@@ -10,25 +10,28 @@
 }
 
 @mixin dtb-radial-gradient ($fromColor, $toColor ) {
-  background: $toColor; /* Fallback */
+  background: $toColor;
+
+  /* Fallback */
   background: -ms-radial-gradient(center, ellipse farthest-corner, $fromColor 0%, $toColor 100%);
 
-  /* IE10 Consumer Preview */ 
+  /* IE10 Consumer Preview */
   background: -moz-radial-gradient(center, ellipse farthest-corner, $fromColor 0%, $toColor 100%);
 
-  /* Firefox */ 
+  /* Firefox */
   background: -o-radial-gradient(center, ellipse farthest-corner, $fromColor 0%, $toColor 100%);
 
-  /* Opera */ 
+  /* Opera */
   background: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, $fromColor), color-stop(1, $toColor));
 
-  /* Webkit (Safari/Chrome 10) */ 
+  /* Webkit (Safari/Chrome 10) */
   background: -webkit-radial-gradient(center, ellipse farthest-corner, $fromColor 0%, $toColor 100%);
 
-  /* Webkit (Chrome 11+) */ 
+  /* Webkit (Chrome 11+) */
   background: radial-gradient(ellipse farthest-corner at center, $fromColor 0%, $toColor 100%);
 
-  /* W3C Markup, IE10 Release Preview */ 
+  /* W3C Markup, IE10 Release Preview */
+  
 }
 
 @mixin dtb-fixed-collection {
@@ -116,7 +119,7 @@
 @mixin dtb-processing {
   color: rgba(0, 0, 0, 0.2);
 
-  &:after {
+  &::after {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -126,7 +129,7 @@
     box-sizing: border-box;
     display: block;
     content: ' ';
-    border: 2px solid rgb(40,40,40);
+    border: 2px solid rgb(40, 40, 40);
     border-radius: 50%;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -139,21 +142,29 @@
 }
 
 @keyframes dtb-spinner {
-  100%{ transform: rotate(360deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @-o-keyframes dtb-spinner {
-  100%{ -o-transform: rotate(360deg); transform: rotate(360deg); }
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); }
 }
 
 @-ms-keyframes dtb-spinner {
-  100%{ -ms-transform: rotate(360deg); transform: rotate(360deg); }
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg); }
 }
 
 @-webkit-keyframes dtb-spinner {
-  100%{ -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); }
 }
 
 @-moz-keyframes dtb-spinner {
-  100%{ -moz-transform: rotate(360deg); transform: rotate(360deg); }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg); }
 }
