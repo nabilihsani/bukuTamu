@@ -25,7 +25,7 @@
 			}
 
 			if ( ! $.fn.dataTable.Buttons ) {
-				require('datatables.net-buttons')(root, $);
+				require("datatables.net-buttons")(root, $);
 			}
 
 			return factory( $, root, root.document );
@@ -65,7 +65,7 @@ var ZeroClipboard_TableTools = {
 		if (!thingy.addClass) {
 			// extend element with a few useful methods
 			thingy.hide = function() { this.style.display = 'none'; };
-			thingy.show = function() { this.style.display = ''; };
+			thingy.show = function() { this.style.display = ""; };
 			thingy.addClass = function(name) { this.removeClass(name); this.className += ' ' + name; };
 			thingy.removeClass = function(name) {
 				this.className = this.className.replace( new RegExp("\\s*" + name + "\\s*"), " ").replace(/^\s+/, '').replace(/\s+$/, '');
@@ -178,7 +178,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 		style.left = '0px';
 		style.top = '0px';
 		style.width = (box.width) + 'px';
-		style.height = box.height + 'px';
+		style.height = box.height + "px";
 		style.zIndex = zIndex;
 
 		if ( typeof title != "undefined" && title !== "" ) {
