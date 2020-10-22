@@ -9,11 +9,11 @@
 (function( factory ){
 	if ( typeof define === 'function' && define.amd ) {
 		// AMD
-		define( ['jquery', 'datatables.net', 'datatables.net-buttons'], function ( $ ) {
+		define( ["jquery", "datatables.net", "datatables.net-buttons"], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
-	else if ( typeof exports === 'object' ) {
+	else if ( typeof exports === "object" ) {
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
@@ -21,7 +21,7 @@
 			}
 
 			if ( ! $ || ! $.fn.dataTable ) {
-				$ = require('datatables.net')(root, $).$;
+				$ = require("datatables.net")(root, $).$;
 			}
 
 			if ( ! $.fn.dataTable.Buttons ) {
@@ -36,7 +36,7 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-'use strict';
+"use strict";
 var DataTable = $.fn.dataTable;
 
 
@@ -59,16 +59,16 @@ var ZeroClipboard_TableTools = {
 
 	$: function(thingy) {
 		// simple DOM lookup utility function
-		if (typeof(thingy) == 'string') {
+		if (typeof(thingy) == "string") {
 			thingy = document.getElementById(thingy);
 		}
 		if (!thingy.addClass) {
 			// extend element with a few useful methods
-			thingy.hide = function() { this.style.display = 'none'; };
+			thingy.hide = function() { this.style.display = "none"; };
 			thingy.show = function() { this.style.display = ""; };
-			thingy.addClass = function(name) { this.removeClass(name); this.className += ' ' + name; };
+			thingy.addClass = function(name) { this.removeClass(name); this.className += " " + name; };
 			thingy.removeClass = function(name) {
-				this.className = this.className.replace( new RegExp("\\s*" + name + "\\s*"), " ").replace(/^\s+/, '').replace(/\s+$/, '');
+				this.className = this.className.replace( new RegExp("\\s*" + name + "\\s*"), " ").replace(/^\s+/, "").replace(/\s+$/, "");
 			};
 			thingy.hasClass = function(name) {
 				return !!this.className.match( new RegExp("\\s*" + name + "\\s*") );
@@ -91,7 +91,7 @@ var ZeroClipboard_TableTools = {
 	},
 
 	log: function ( str ) {
-		console.log( 'Flash: '+str );
+		console.log( "Flash: "+str );
 	},
 
 	register: function(id, client) {
@@ -131,7 +131,7 @@ var ZeroClipboard_TableTools = {
 
 		// unique ID
 		this.id = ZeroClipboard_TableTools.nextId++;
-		this.movieId = 'ZeroClipboard_TableToolsMovie_' + this.id;
+		this.movieId = "ZeroClipboard_TableToolsMovie_" + this.id;
 
 		// register client with singleton to receive flash events
 		ZeroClipboard_TableTools.register(this.id, this);
@@ -148,14 +148,14 @@ ZeroClipboard_TableTools.Client.prototype = {
 	id: 0, // unique ID for us
 	ready: false, // whether movie is ready to receive events or not
 	movie: null, // reference to movie object
-	clipText: '', // text to copy to clipboard
-	fileName: '', // default file save name
-	action: 'copy', // action to perform
+	clipText: "", // text to copy to clipboard
+	fileName: "", // default file save name
+	action: "copy", // action to perform
 	handCursorEnabled: true, // whether to show hand cursor, or default pointer cursor
 	cssEffects: true, // enable CSS mouse effects on dom container
 	handlers: null, // user event handlers
 	sized: false,
-	sheetName: '', // default sheet name for excel export
+	sheetName: "", // default sheet name for excel export
 
 	glue: function(elem, title) {
 		// glue to DOM element
@@ -172,12 +172,12 @@ ZeroClipboard_TableTools.Client.prototype = {
 		var box = ZeroClipboard_TableTools.getDOMObjectPosition(this.domElement);
 
 		// create floating DIV above element
-		this.div = document.createElement('div');
+		this.div = document.createElement("div");
 		var style = this.div.style;
-		style.position = 'absolute';
-		style.left = '0px';
-		style.top = '0px';
-		style.width = (box.width) + 'px';
+		style.position = "absolute";
+		style.left = "0px";
+		style.top = "0px";
+		style.width = (box.width) + "px";
 		style.height = box.height + "px";
 		style.zIndex = zIndex;
 
@@ -191,7 +191,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 		// style.backgroundColor = '#f00'; // debug
 		if ( this.domElement ) {
 			this.domElement.appendChild(this.div);
-			this.div.innerHTML = this.getHTML( box.width, box.height ).replace(/&/g, '&amp;');
+			this.div.innerHTML = this.getHTML( box.width, box.height ).replace(/&/g, "&amp;");
 		}
 	},
 
@@ -199,11 +199,11 @@ ZeroClipboard_TableTools.Client.prototype = {
 		var box = ZeroClipboard_TableTools.getDOMObjectPosition(this.domElement);
 		var style = this.div.style;
 
-		style.position = 'absolute';
+		style.position = "absolute";
 		//style.left = (this.domElement.offsetLeft)+'px';
 		//style.top = this.domElement.offsetTop+'px';
-		style.width = box.width + 'px';
-		style.height = box.height + 'px';
+		style.width = box.width + "px";
+		style.height = box.height + "px";
 
 		if ( box.width !== 0 && box.height !== 0 ) {
 			this.sized = true;
@@ -218,14 +218,14 @@ ZeroClipboard_TableTools.Client.prototype = {
 
 	getHTML: function(width, height) {
 		// return HTML for movie
-		var html = '';
-		var flashvars = 'id=' + this.id +
-			'&width=' + width +
-			'&height=' + height;
+		var html = "";
+		var flashvars = "id=" + this.id +
+			"&width=" + width +
+			"&height=" + height;
 
 		if (navigator.userAgent.match(/MSIE/)) {
 			// IE gets an OBJECT tag
-			var protocol = location.href.match(/^https/i) ? 'https://' : 'http://';
+			var protocol = location.href.match(/^https/i) ? "https://" : "http://";
 			html += '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="'+protocol+'download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="'+width+'" height="'+height+'" id="'+this.movieId+'" align="middle"><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="false" /><param name="movie" value="'+ZeroClipboard_TableTools.moviePath+'" /><param name="loop" value="false" /><param name="menu" value="false" /><param name="quality" value="best" /><param name="bgcolor" value="#ffffff" /><param name="flashvars" value="'+flashvars+'"/><param name="wmode" value="transparent"/></object>';
 		}
 		else {
@@ -238,7 +238,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 	hide: function() {
 		// temporarily hide floater offscreen
 		if (this.div) {
-			this.div.style.left = '-2000px';
+			this.div.style.left = "-2000px";
 		}
 	},
 
@@ -278,14 +278,14 @@ ZeroClipboard_TableTools.Client.prototype = {
 		if (this.domElement && this.div) {
 			var box = ZeroClipboard_TableTools.getDOMObjectPosition(this.domElement);
 			var style = this.div.style;
-			style.left = '' + box.left + 'px';
-			style.top = '' + box.top + 'px';
+			style.left = "" + box.left + "px";
+			style.top = "" + box.top + "px";
 		}
 	},
 
 	clearText: function() {
 		// clear the text to be copy / saved
-		this.clipText = '';
+		this.clipText = "";
 		if (this.ready) {
 			this.movie.clearText();
 		}
@@ -329,7 +329,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 	addEventListener: function(eventName, func) {
 		// add user event listener for event
 		// event types: load, queueStart, fileStart, fileComplete, queueComplete, progress, error, cancel
-		eventName = eventName.toString().toLowerCase().replace(/^on/, '');
+		eventName = eventName.toString().toLowerCase().replace(/^on/, "");
 		if (!this.handlers[eventName]) {
 			this.handlers[eventName] = [];
 		}
@@ -353,24 +353,24 @@ ZeroClipboard_TableTools.Client.prototype = {
 		var self;
 
 		// receive event from flash
-		eventName = eventName.toString().toLowerCase().replace(/^on/, '');
+		eventName = eventName.toString().toLowerCase().replace(/^on/, "");
 
 		// special behavior for certain events
 		switch (eventName) {
-			case 'load':
+			case "load":
 				// movie claims it is ready, but in IE this isn't always the case...
 				// bug fix: Cannot extend EMBED DOM elements in Firefox, must use traditional function
 				this.movie = document.getElementById(this.movieId);
 				if (!this.movie) {
 					self = this;
-					setTimeout( function() { self.receiveEvent('load', null); }, 1 );
+					setTimeout( function() { self.receiveEvent("load", null); }, 1 );
 					return;
 				}
 
 				// firefox on pc needs a "kick" in order to set these in certain cases
 				if (!this.ready && navigator.userAgent.match(/Firefox/) && navigator.userAgent.match(/Windows/)) {
 					self = this;
-					setTimeout( function() { self.receiveEvent('load', null); }, 100 );
+					setTimeout( function() { self.receiveEvent("load", null); }, 100 );
 					this.ready = true;
 					return;
 				}
@@ -383,35 +383,35 @@ ZeroClipboard_TableTools.Client.prototype = {
 				this.movie.setHandCursor( this.handCursorEnabled );
 				break;
 
-			case 'mouseover':
+			case "mouseover":
 				if (this.domElement && this.cssEffects) {
 					//this.domElement.addClass('hover');
 					if (this.recoverActive) {
-						this.domElement.addClass('active');
+						this.domElement.addClass("active");
 					}
 				}
 				break;
 
-			case 'mouseout':
+			case "mouseout":
 				if (this.domElement && this.cssEffects) {
 					this.recoverActive = false;
-					if (this.domElement.hasClass('active')) {
-						this.domElement.removeClass('active');
+					if (this.domElement.hasClass("active")) {
+						this.domElement.removeClass("active");
 						this.recoverActive = true;
 					}
 					//this.domElement.removeClass('hover');
 				}
 				break;
 
-			case 'mousedown':
+			case "mousedown":
 				if (this.domElement && this.cssEffects) {
-					this.domElement.addClass('active');
+					this.domElement.addClass("active");
 				}
 				break;
 
-			case 'mouseup':
+			case "mouseup":
 				if (this.domElement && this.cssEffects) {
-					this.domElement.removeClass('active');
+					this.domElement.removeClass("active");
 					this.recoverActive = false;
 				}
 				break;
@@ -421,15 +421,15 @@ ZeroClipboard_TableTools.Client.prototype = {
 			for (var idx = 0, len = this.handlers[eventName].length; idx < len; idx++) {
 				var func = this.handlers[eventName][idx];
 
-				if (typeof(func) == 'function') {
+				if (typeof(func) == "function") {
 					// actual function reference
 					func(this, args);
 				}
-				else if ((typeof(func) == 'object') && (func.length == 2)) {
+				else if ((typeof(func) == "object") && (func.length == 2)) {
 					// PHP style object + method, i.e. [myObject, 'myMethod']
 					func[0][ func[1] ](this, args);
 				}
-				else if (typeof(func) == 'string') {
+				else if (typeof(func) == "string") {
 					// name of function
 					window[func](this, args);
 				}
@@ -441,7 +441,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 ZeroClipboard_TableTools.hasFlash = function ()
 {
 	try {
-		var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+		var fo = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
 		if (fo) {
 			return true;
 		}
@@ -449,8 +449,8 @@ ZeroClipboard_TableTools.hasFlash = function ()
 	catch (e) {
 		if (
 			navigator.mimeTypes &&
-			navigator.mimeTypes['application/x-shockwave-flash'] !== undefined &&
-			navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin
+			navigator.mimeTypes["application/x-shockwave-flash"] !== undefined &&
+			navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin
 		) {
 			return true;
 		}
@@ -479,10 +479,10 @@ window.ZeroClipboard_TableTools = ZeroClipboard_TableTools;
  */
 var _glue = function ( flash, node )
 {
-	var id = node.attr('id');
+	var id = node.attr("id");
 
-	if ( node.parents('html').length ) {
-		flash.glue( node[0], '' );
+	if ( node.parents("html").length ) {
+		flash.glue( node[0], "" );
 	}
 	else {
 		setTimeout( function () {
@@ -498,10 +498,10 @@ var _glue = function ( flash, node )
  */
 var _sheetname = function ( config )
 {
-	var sheetName = 'Sheet1';
+	var sheetName = "Sheet1";
 
 	if ( config.sheetName ) {
-		sheetName = config.sheetName.replace(/[\[\]\*\/\\\?\:]/g, '');
+		sheetName = config.sheetName.replace(/[\[\]\*\/\\\?\:]/g, "");
 	}
 
 	return sheetName;
