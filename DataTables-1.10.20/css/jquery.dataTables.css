@@ -7,10 +7,11 @@ table.dataTable {
   clear: both;
   border-collapse: separate;
   border-spacing: 0;
-  
+
   /*
    * Header and footer styles
    */
+
   /*
    * Body styles
    */
@@ -229,7 +230,9 @@ table.dataTable.display tbody tr:hover.selected > .sorting_1,
 table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_1 {
   background-color: #a2aec7;
 }
-table.dataTable.display tbody tr:hover.selected > .sorting_2, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_2 {
+
+table.dataTable.display tbody tr:hover.selected > .sorting_2,
+table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_2 {
   background-color: #a3b0c9;
 }
 
@@ -360,7 +363,6 @@ table.dataTable td {
 .dataTables_wrapper {
   position: relative;
   clear: both;
-  *zoom: 1;
   zoom: 1;
 }
 
