@@ -96,8 +96,8 @@
     }
 
     if (isset($_POST["submitCode"])) {
-        $code2 = testInput($_POST['staticCodeIn']);
-        $code1 = testInput($_POST['inputCode']);
+      	$code2 = filter_input(INPUT_POST, 'staticCodeIn');
+	$code1 = filter_input(INPUT_POST, 'inputCode');
         $query2 = "SELECT * FROM kartu WHERE Code = '$code1'";
         $result2 = $db->query($query2);
         $numRow = $result2->num_rows;
