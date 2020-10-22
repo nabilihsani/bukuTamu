@@ -10,9 +10,9 @@
  ?>
 <?=
     '</tr>
-    <td>'.$a.'</td>
-    <td>'.$b.'</td>
-    <td>'.$c.'</td>
+    <td>'.addslashes($a).'</td>
+    <td>'.addslashes($b).'</td>
+    <td>'.addslashes($c).'</td>
     </tr>'
  ?>
 <?php 
