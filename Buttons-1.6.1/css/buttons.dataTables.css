@@ -414,7 +414,7 @@ div.dt-button-background {
 
   /* Webkit (Chrome 11+) */
   background: radial-gradient(ellipse farthest-corner at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
- 
+
   /* W3C Markup, IE10 Release Preview */
   z-index: 2001;
 }
