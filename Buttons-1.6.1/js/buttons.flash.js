@@ -7,13 +7,13 @@
  */
 
 (function( factory ){
-	if ( typeof define === 'function' && define.amd ) {
+	if ( typeof define === "function" && define.amd ) {
 		// AMD
-		define( ['jquery', 'datatables.net', 'datatables.net-buttons'], function ( $ ) {
+		define( ["jquery", "datatables.net", "datatables.net-buttons"], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
-	else if ( typeof exports === 'object' ) {
+	else if ( typeof exports === "object" ) {
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
@@ -21,11 +21,11 @@
 			}
 
 			if ( ! $ || ! $.fn.dataTable ) {
-				$ = require('datatables.net')(root, $).$;
+				$ = require("datatables.net")(root, $).$;
 			}
 
 			if ( ! $.fn.dataTable.Buttons ) {
-				require('datatables.net-buttons')(root, $);
+				require("datatables.net-buttons")(root, $);
 			}
 
 			return factory( $, root, root.document );
@@ -36,7 +36,7 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-'use strict';
+"use strict";
 var DataTable = $.fn.dataTable;
 
 
@@ -54,21 +54,21 @@ var DataTable = $.fn.dataTable;
 var ZeroClipboard_TableTools = {
 	version: "1.0.4-TableTools2",
 	clients: {}, // registered upload clients on page, indexed by id
-	moviePath: '', // URL to movie
+	moviePath: "", // URL to movie
 	nextId: 1, // ID of next movie
 
 	$: function(thingy) {
 		// simple DOM lookup utility function
-		if (typeof(thingy) == 'string') {
+		if (typeof(thingy) == "string") {
 			thingy = document.getElementById(thingy);
 		}
 		if (!thingy.addClass) {
 			// extend element with a few useful methods
-			thingy.hide = function() { this.style.display = 'none'; };
-			thingy.show = function() { this.style.display = ''; };
-			thingy.addClass = function(name) { this.removeClass(name); this.className += ' ' + name; };
+			thingy.hide = function() { this.style.display = "none"; };
+			thingy.show = function() { this.style.display = ""; };
+			thingy.addClass = function(name) { this.removeClass(name); this.className += " " + name; };
 			thingy.removeClass = function(name) {
-				this.className = this.className.replace( new RegExp("\\s*" + name + "\\s*"), " ").replace(/^\s+/, '').replace(/\s+$/, '');
+				this.className = this.className.replace( new RegExp("\\s*" + name + "\\s*"), " ").replace(/^\s+/, "").replace(/\s+$/, "");
 			};
 			thingy.hasClass = function(name) {
 				return !!this.className.match( new RegExp("\\s*" + name + "\\s*") );
@@ -91,7 +91,7 @@ var ZeroClipboard_TableTools = {
 	},
 
 	log: function ( str ) {
-		console.log( 'Flash: '+str );
+		console.log( "Flash: "+str );
 	},
 
 	register: function(id, client) {
@@ -131,7 +131,7 @@ var ZeroClipboard_TableTools = {
 
 		// unique ID
 		this.id = ZeroClipboard_TableTools.nextId++;
-		this.movieId = 'ZeroClipboard_TableToolsMovie_' + this.id;
+		this.movieId = "ZeroClipboard_TableToolsMovie_" + this.id;
 
 		// register client with singleton to receive flash events
 		ZeroClipboard_TableTools.register(this.id, this);
@@ -148,14 +148,14 @@ ZeroClipboard_TableTools.Client.prototype = {
 	id: 0, // unique ID for us
 	ready: false, // whether movie is ready to receive events or not
 	movie: null, // reference to movie object
-	clipText: '', // text to copy to clipboard
-	fileName: '', // default file save name
-	action: 'copy', // action to perform
+	clipText: "", // text to copy to clipboard
+	fileName: "", // default file save name
+	action: "copy", // action to perform
 	handCursorEnabled: true, // whether to show hand cursor, or default pointer cursor
 	cssEffects: true, // enable CSS mouse effects on dom container
 	handlers: null, // user event handlers
 	sized: false,
-	sheetName: '', // default sheet name for excel export
+	sheetName: "", // default sheet name for excel export
 
 	glue: function(elem, title) {
 		// glue to DOM element
@@ -172,13 +172,13 @@ ZeroClipboard_TableTools.Client.prototype = {
 		var box = ZeroClipboard_TableTools.getDOMObjectPosition(this.domElement);
 
 		// create floating DIV above element
-		this.div = document.createElement('div');
+		this.div = document.createElement("div");
 		var style = this.div.style;
-		style.position = 'absolute';
-		style.left = '0px';
-		style.top = '0px';
-		style.width = (box.width) + 'px';
-		style.height = box.height + 'px';
+		style.position = "absolute";
+		style.left = "0px";
+		style.top = "0px";
+		style.width = (box.width) + "px";
+		style.height = box.height + "px";
 		style.zIndex = zIndex;
 
 		if ( typeof title != "undefined" && title !== "" ) {
@@ -191,7 +191,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 		// style.backgroundColor = '#f00'; // debug
 		if ( this.domElement ) {
 			this.domElement.appendChild(this.div);
-			this.div.innerHTML = this.getHTML( box.width, box.height ).replace(/&/g, '&amp;');
+			this.div.innerHTML = this.getHTML( box.width, box.height ).replace(/&/g, "&amp;");
 		}
 	},
 
@@ -202,7 +202,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 		style.position = 'absolute';
 		//style.left = (this.domElement.offsetLeft)+'px';
 		//style.top = this.domElement.offsetTop+'px';
-		style.width = box.width + 'px';
+		style.width = box.width + "px";
 		style.height = box.height + 'px';
 
 		if ( box.width !== 0 && box.height !== 0 ) {
