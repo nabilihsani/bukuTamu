@@ -1,9 +1,5 @@
 <?php 
-  require_once('db_login.php');
-  $db = new mysqli($db_host, $db_username, $db_password, $db_database);
-  if ($db->connect_errno) {
-    die ("Could not connect to the database: <br />"). $db->connect_errno;
-  }
+  include 'db_login.php';
 
   $sql1 = "SELECT b.idTamu, a.Nama FROM kunjungan AS b INNER JOIN tamu AS a ON a.idTamu = b.idTamu WHERE Status = 'Booking'";
   $re1 = $db->query($sql1);
@@ -35,17 +31,9 @@
     $Code = randomCode($permittedChars, 3);
   }
 
-  function testInput($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-
-  if (isset($_POST["verifyIn"])) {
-    if (empty($idIn)) {
-      $idIn = testInput($_POST['inputIdIn']);
-    }
+  $a = filter_input(INPUT_POST, 'verifyIn');
+  if (isset($a)) {
+    $idIn = filter_input(INPUT_POST, 'inputIdIn');
     $query = "SELECT * FROM kunjungan AS b INNER JOIN tamu AS a ON a.idTamu = b.idTamu WHERE b.idTamu = '$idIn' AND b.Status = 'Booking'";
     $result = $db->query($query);
     $numRow = $result->num_rows;
@@ -96,9 +84,9 @@
       }
     }
   }
-
-  if (isset($_POST["submitOut"])) {
-    $idOut = testInput($_POST['inputIdOut']); 
+  $a = filter_input(INPUT_POST, 'submitOut');
+  if (isset($a)) {
+    $idOut = filter_input(INPUT_POST, 'inputIdOut');
     $q2 = "SELECT * FROM tamu WHERE idTamu = '$idOut'";
     $r2 = $db->query($q2);
     $numRow = $r2->num_rows;
@@ -135,11 +123,9 @@
       }
     }
   }
-
-  if (isset($_POST["submitOutY"])) {
-    if (empty($idIn)) {
-      $idOutY = testInput($_POST['inputIdOutY']);
-    }
+  $a = filter_input(INPUT_POST, 'submitOutY');
+  if (isset($a)) {
+    $idOutY = filter_input(INPUT_POST, 'inputIdOutY');
     $q1 = "SELECT * FROM kunjungan WHERE idTamu = '$idOutY'";
     $r1 = $db->query($q1);
     $numRow = $r1->num_rows;
@@ -174,16 +160,16 @@
       } 
     }
   }
-
-  if (isset($_POST["submitIn"])) {
-    $id = testInput($_POST['staticCodeIn']);
-    $name = testInput($_POST['inputNamaIn']);
-    $telp = testInput($_POST['inputPhoneInS']);
-    $company = testInput($_POST['inputCompanyIn']);
-    $loc = testInput($_POST['inputLocInS']);
-    $email = testInput($_POST['inputEmailIn']);
-    $tujuan = testInput($_POST['inputTujuanIn']);
-    $keperluan = testInput($_POST['KeperluanIn']);
+  $a = filter_input(INPUT_POST, 'submitIn');
+  if (isset($a)) {
+    $id = filter_input(INPUT_POST, 'staticCodeIn');
+    $name = filter_input(INPUT_POST, 'inputNamaIn');
+    $telp = filter_input(INPUT_POST, 'inputPhoneInS');
+    $company = filter_input(INPUT_POST, 'inputCompanyIn');
+    $loc = filter_input(INPUT_POST, 'inputLocInS');
+    $email = filter_input(INPUT_POST, 'inputEmailIn');
+    $tujuan = filter_input(INPUT_POST, 'inputTujuanIn');
+    $keperluan = filter_input(INPUT_POST, 'KeperluanIn');
 
     $query = "UPDATE tamu SET Phone = '$telp', Company = '$company', Email = '$email', Lokasi = '$loc' WHERE idTamu = '$id'";
     $result = $db->query($query);
@@ -196,18 +182,18 @@
     });
     </script>";
   }
-
-  if (isset($_POST["submitInG"])) {
-    $id = testInput($_POST['staticCodeInG']);
-    $name = testInput($_POST['inputNamaInG']);
-    $phone = testInput($_POST['inputPhoneInG']);
-    $company = testInput($_POST['inputCompanyInG']);
-    $loc = testInput($_POST['inputLocInG']);
-    $group = testInput($_POST['inputGroupG']);
-    $groupPerson = testInput($_POST['inputGroupPersonG']);
-    $email = testInput($_POST['inputEmailInG']);
-    $tujuan = testInput($_POST['inputTujuanInG']);
-    $keperluan = testInput($_POST['KeperluanInG']);
+  $a = filter_input(INPUT_POST, 'submitInG');
+  if (isset($a)) {
+    $id = filter_input(INPUT_POST, 'staticCodeInG');
+    $name = filter_input(INPUT_POST, 'inputNamaInG');
+    $phone = filter_input(INPUT_POST, 'inputPhoneInG');
+    $company = filter_input(INPUT_POST, 'inputCompanyInG');
+    $loc = filter_input(INPUT_POST, 'inputLocInG');
+    $group = filter_input(INPUT_POST, 'inputGroupG');
+    $groupPerson = filter_input(INPUT_POST, 'inputGroupPersonG');
+    $email = filter_input(INPUT_POST, 'inputEmailInG');
+    $tujuan = filter_input(INPUT_POST, 'inputTujuanInG');
+    $keperluan = filter_input(INPUT_POST, 'KeperluanInG');
 
     $query = "UPDATE grup SET grupName = '$group', Company = '$company', Lokasi = '$loc' WHERE grupId = '$id'";
     $result = $db->query($query);
@@ -220,17 +206,16 @@
     });
     </script>";
   }
-
-  if (isset($_POST["submitS"])) {
-    $id = testInput($_POST['staticCodeS']);
-    $name = testInput($_POST['inputNamaS']);
-    $telp = testInput($_POST['inputPhoneS']);
-    $loc = testInput($_POST['inputLocS']);
-    $company = testInput($_POST['inputCompanyS']);
-    $email = testInput($_POST['inputEmailS']);
-    $tujuan = testInput($_POST['inputTujuanS']);
-    $keperluan = testInput($_POST['KeperluanS']);
-
+  $a = filter_input(INPUT_POST, 'submitS');
+  if (isset($a)) {
+    $id = filter_input(INPUT_POST, 'staticCodeS');
+    $name = filter_input(INPUT_POST, 'inputNamaS');
+    $telp = filter_input(INPUT_POST, 'inputPhoneS');
+    $loc = filter_input(INPUT_POST, 'inputLocS');
+    $company = filter_input(INPUT_POST, 'inputCompanyS');
+    $email = filter_input(INPUT_POST, 'inputEmailS');
+    $tujuan = filter_input(INPUT_POST, 'inputTujuanS');
+    $keperluan = filter_input(INPUT_POST, 'KeperluanS');
     $query = " INSERT INTO tamu (idTamu, Nama, Phone, Email, Company, Lokasi) VALUES('$id', '$name', '$telp', '$email', '$company', '$loc')";
     $result = $db->query($query);
     $query1 = " INSERT INTO kunjungan (idTamu, Tujuan, Keperluan, Masuk, Status) VALUES('$id', '$tujuan', '$keperluan', CURRENT_TIMESTAMP(), 'Active')";
@@ -242,19 +227,18 @@
     });
     </script>";
   }
-    
-  if (isset($_POST["submitG"])) {
-    $id = testInput($_POST['staticCodeG']);
-    $name = testInput($_POST['inputNamaG']);
-    $telp = testInput($_POST['inputPhoneG']);
-    $company = testInput($_POST['inputCompanyG']);
-    $loc = testInput($_POST['inputLocG']);
-    $group = testInput($_POST['inputGroup']);
-    $groupPerson = testInput($_POST['inputGroupPerson']);
-    $email = testInput($_POST['inputEmailG']);
-    $tujuan = testInput($_POST['inputTujuanG']);
-    $keperluan = testInput($_POST['KeperluanG']);
-
+  $a = filter_input(INPUT_POST, 'submitG');
+  if (isset($a)) {
+    $id = filter_input(INPUT_POST, 'staticCodeG');
+    $name = filter_input(INPUT_POST, 'inputNamaG');
+    $telp = filter_input(INPUT_POST, 'inputPhoneG');
+    $company = filter_input(INPUT_POST, 'inputCompanyG');
+    $loc = filter_input(INPUT_POST, 'inputLocG');
+    $group = filter_input(INPUT_POST, 'inputGroup');
+    $groupPerson = filter_input(INPUT_POST, 'inputGroupPerson');
+    $email = filter_input(INPUT_POST, 'inputEmailG');
+    $tujuan = filter_input(INPUT_POST, 'inputTujuanG');
+    $keperluan = filter_input(INPUT_POST, 'KeperluanG');
     $query = " INSERT INTO grup (grupId, grupName, Company, Lokasi) VALUES('$id', '$group', '$company', '$loc')";
     $result = $db->query($query);
     $query1 = " INSERT INTO grupvisit (grupId, visitorName, visitPhone, visitorEmail, visitCount, Tujuan, Keperluan, Masuk, Status) VALUES('$id', '$name', '$telp', '$email', '$groupPerson', '$tujuan', '$keperluan', CURRENT_TIMESTAMP(), 'Active')";
