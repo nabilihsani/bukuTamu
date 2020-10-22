@@ -8,8 +8,8 @@
     while ($row = mysqli_fetch_array($result)) {
     	echo '<tr>';
         print_r('<td>'.$row['Code'].'</td>');
-    	echo '<td>'.$row['id'].'</td>';
-        echo '<td>'.$row['status'].'</td>';
+    	print_r('<td>'.$row['id'].'</td>');
+        print_r('<td>'.$row['status'].'</td>');
     	echo '</tr>';
     }
 
