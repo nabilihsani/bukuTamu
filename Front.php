@@ -6,8 +6,8 @@
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" href="CSS/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="CSS/Front.css?ver=<?php echo rand(111,999)?>">
-  <link rel="stylesheet" href="build/css/intlTelInput.css">
+	<link rel="stylesheet" type="text/css" href="CSS/Front.css">
+  	<link rel="stylesheet" href="build/css/intlTelInput.css">
 	<title></title>
 	<script src="vendor/jquery/jquery.slim.min.js"></script>
 	<script src="Js/popper.min.js"></script>
@@ -54,11 +54,15 @@
                     <datalist id="idIn">
                       <?php  
                         while ($row = mysqli_fetch_array($re1)) {
-                          echo "<option value='".$row['idTamu']."'>".$row['Nama']."</option>";
-                        }
+		       ?>	
+                          <?= "<option value='".$row['idTamu']."'>".$row['Nama']."</option>" ?>
+                      <?php 
+			}
                         while ($row = mysqli_fetch_array($re1G)) {
-                          echo "<option value='".$row['grupId']."'>".$row['grupName']."</option>";
-                        }
+                       ?>
+			  <?= "<option value='".$row['grupId']."'>".$row['grupName']."</option>" ?>
+                      <?php
+			}
                       ?>  
                     </datalist> 
                   </input>
@@ -113,9 +117,9 @@
           <div class="modal-body">
             <div class="form-group text-center d-none">
               <label for="inputIdOutY">Please enter your Visit Id</label>
-              <input type="text" class="form-control" id="inputIdOutY" name="inputIdOutY" placeholder="Visit Id" style="text-align: center;" required value="<?php echo $idOut; ?>"></input>
+              <input type="text" class="form-control" id="inputIdOutY" name="inputIdOutY" placeholder="Visit Id" style="text-align: center;" required value="<?= $idOut ?>"></input>
             </div>
-            <?php echo $name; ?>, Are you sure want to Check Out?.
+            <?= $name ?>, Are you sure want to Check Out?.
           </div>
           <div class="modal-footer">
             <button id="submitOutY" name="submitOutY" type="submit" class="btn btn-primary">Yes</button>
@@ -165,59 +169,59 @@
                   <div class="form-group row">
                     <label for="staticCodeIn" class="col-sm-2 col-form-label">Guest ID</label>
                     <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext" name="staticCodeIn" id="staticCodeIn" value="<?php echo $code; ?>"></input>
+                      <input type="text" readonly class="form-control-plaintext" name="staticCodeIn" id="staticCodeIn" value="<?= $code ?>"></input>
                     </div>
                   </div>             
                 <div class="form-group row">
                   <label for="inputNamaIn" class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="inputNamaIn" id="inputNamaIn" placeholder="Visitor name" value="<?php echo $name; ?>" required></input>
+                    <input type="text" class="form-control" name="inputNamaIn" id="inputNamaIn" placeholder="Visitor name" value="<?= $name ?>" required></input>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputPhoneInS" class="col-sm-2 col-form-label" style="font-size: 15px">Phone Number</label>
                   <div class="col-sm-10">
-                    <input type="tel" class="form-control" placeholder="Visitor phone number" id="inputPhoneInS" name="inputPhoneInS" value="<?php echo $phone; ?>"></input>
+                    <input type="tel" class="form-control" placeholder="Visitor phone number" id="inputPhoneInS" name="inputPhoneInS" value="<?= $phone ?>"></input>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmailIn" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmailIn" name="inputEmailIn" placeholder="Visitor email address" value="<?php echo $email; ?>" required></input>
+                    <input type="email" class="form-control" id="inputEmailIn" name="inputEmailIn" placeholder="Visitor email address" value="<?= $email ?>" required></input>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputCompanyIn" class="col-sm-2 col-form-label">Company</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputCompanyIn" name="inputCompanyIn" placeholder="Name of your company" value="<?php echo $company ?>" required></input>
+                    <input type="text" class="form-control" id="inputCompanyIn" name="inputCompanyIn" placeholder="Name of your company" value="<? $company ?>" required></input>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputLocInS" class="col-sm-2 col-form-label">Location</label>
                   <div class="col-sm-10">
                     <select class="form-control" id="inputLocInS" name="inputLocInS">
-                      <option value="" <?php if (!isset($loc)) echo 'selected="true"';?>>--Please Choose One--</option>
-                      <option value="Batam" <?php if (isset($loc) && $loc=="Batam") echo 'selected="true"';?>>Batam</option>
-                      <option value="Cikarang" <?php if (isset($loc) && $loc=="Cikarang") echo 'selected="true"';?>>Cikarang</option>
-                      <option value="Pel" <?php if (isset($loc) && $loc=="Pel") echo 'selected="true"';?>>Pel</option>
-                      <option value="Pem" <?php if (isset($loc) && $loc=="Pem") echo 'selected="true"';?>>Pem</option>
-                      <option value="Sensor" <?php if (isset($loc) && $loc=="Sensor") echo 'selected="true"';?>>Sensor</option>
-                      <option value="Surabaya" <?php if (isset($loc) && $loc=="Surabaya") echo 'selected="true"';?>>Surabaya</option>
-                      <option value="Trafo" <?php if (isset($loc) && $loc=="Trafo") echo 'selected="true"';?>>Trafo</option>
-                      <option value="Ventura" <?php if (isset($loc) && $loc=="Ventura") echo 'selected="true"';?>>Ventura</option>
+                      <option value="" <?php if (!isset($loc)) ?><?= 'selected="true"' ?>>--Please Choose One--</option>
+                      <option value="Batam" <?php if (isset($loc) && $loc=="Batam") ?><?= 'selected="true"' ?>>Batam</option>
+                      <option value="Cikarang" <?php if (isset($loc) && $loc=="Cikarang") ?><?= 'selected="true"' ?>>Cikarang</option>
+                      <option value="Pel" <?php if (isset($loc) && $loc=="Pel") ?><?= 'selected="true"' ?>>Pel</option>
+                      <option value="Pem" <?php if (isset($loc) && $loc=="Pem") ?><?= 'selected="true"' ?>>Pem</option>
+                      <option value="Sensor" <?php if (isset($loc) && $loc=="Sensor") ?><?= 'selected="true"' ?>>Sensor</option>
+                      <option value="Surabaya" <?php if (isset($loc) && $loc=="Surabaya") ?><?= 'selected="true"' ?>>Surabaya</option>
+                      <option value="Trafo" <?php if (isset($loc) && $loc=="Trafo") ?><?= 'selected="true"' ?>>Trafo</option>
+                      <option value="Ventura" <?php if (isset($loc) && $loc=="Ventura") ?><?= 'selected="true"' ?>>Ventura</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputTujuanIn" class="col-sm-2 col-form-label">Tujuan</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputTujuanIn" name="inputTujuanIn" placeholder="person you want to visit" value="<?php echo $tujuan ?>" required></input>
+                    <input type="text" class="form-control" id="inputTujuanIn" name="inputTujuanIn" placeholder="person you want to visit" value="<?= $tujuan ?>" required></input>
                   </div>  
                 </div>
                 <div class="form-group row">
                   <label for="KeperluanIn" class="col-sm-2 col-form-label">Keperluan</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="KeperluanIn" name="KeperluanIn" placeholder="Purpose of your visit" required><?php echo $keperluan ?></textarea>
+                    <textarea class="form-control" id="KeperluanIn" name="KeperluanIn" placeholder="Purpose of your visit" required><?= $keperluan ?></textarea>
                   </div>
                 </div>
               </div>
@@ -250,68 +254,68 @@
                   <div class="form-group row">
                     <label for="staticCodeInG" class="col-sm-2 col-form-label">Group ID</label>
                     <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext" name="staticCodeInG" id="staticCodeInG" value="<?php echo $code; ?>"></input>
+                      <input type="text" readonly class="form-control-plaintext" name="staticCodeInG" id="staticCodeInG" value="<?= $code ?>"></input>
                     </div>
                   </div>
                 <div class="form-group row">
                   <label for="inputNamaInG" class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="inputNamaInG" id="inputNamaInG" placeholder="Visitor name" value="<?php echo $vname; ?>" required></input>
+                    <input type="text" class="form-control" name="inputNamaInG" id="inputNamaInG" placeholder="Visitor name" value="<?= $vname ?>" required></input>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputPhoneInG" class="col-sm-2 col-form-label" style="font-size: 15px">Phone Number</label>
                   <div class="col-sm-10">
-                    <input type="tel" class="form-control" id="inputPhoneInG" value="<?php echo $phone; ?>" name="inputPhoneInG"></input>
+                    <input type="tel" class="form-control" id="inputPhoneInG" value="<?= $phone ?>" name="inputPhoneInG"></input>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputEmailInG" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmailInG" name="inputEmailInG" placeholder="Visitor email address" value="<?php echo $email; ?>" required></input>
+                    <input type="email" class="form-control" id="inputEmailInG" name="inputEmailInG" placeholder="Visitor email address" value="<?= $email ?>" required></input>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputGroupG" class="col-sm-2 col-form-label">Group</label>
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" name="inputGroupG" id="inputGroupG" placeholder="Name of your group" value="<?php echo $name; ?>" required></input>
+                    <input type="text" class="form-control" name="inputGroupG" id="inputGroupG" placeholder="Name of your group" value="<?= $name ?>" required></input>
                   </div>
                   <div class="col-sm-5">
-                    <input type="number" class="form-control" name="inputGroupPersonG" id="inputGroupPersonG" placeholder="Visitor Count" value="<?php echo $count; ?>" required></input>
+                    <input type="number" class="form-control" name="inputGroupPersonG" id="inputGroupPersonG" placeholder="Visitor Count" value="<?= $count ?>" required></input>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputCompanyInG" class="col-sm-2 col-form-label">Company</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputCompanyInG" name="inputCompanyInG" placeholder="Name of your company" value="<?php echo $company ?>" required></input>
+                    <input type="text" class="form-control" id="inputCompanyInG" name="inputCompanyInG" placeholder="Name of your company" value="<? $company ?>" required></input>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputLocInG" class="col-sm-2 col-form-label">Location</label>
                   <div class="col-sm-10">
                     <select class="form-control" id="inputLocInG" name="inputLocInG">
-                      <option value="" <?php if (!isset($loc)) echo 'selected="true"';?>>--Please Choose One--</option>
-                      <option value="Batam" <?php if (isset($loc) && $loc=="Batam") echo 'selected="true"';?>>Batam</option>
-                      <option value="Cikarang" <?php if (isset($loc) && $loc=="Cikarang") echo 'selected="true"';?>>Cikarang</option>
-                      <option value="Pel" <?php if (isset($loc) && $loc=="Pel") echo 'selected="true"';?>>Pel</option>
-                      <option value="Pem" <?php if (isset($loc) && $loc=="Pem") echo 'selected="true"';?>>Pem</option>
-                      <option value="Sensor" <?php if (isset($loc) && $loc=="Sensor") echo 'selected="true"';?>>Sensor</option>
-                      <option value="Surabaya" <?php if (isset($loc) && $loc=="Surabaya") echo 'selected="true"';?>>Surabaya</option>
-                      <option value="Trafo" <?php if (isset($loc) && $loc=="Trafo") echo 'selected="true"';?>>Trafo</option>
-                      <option value="Ventura" <?php if (isset($loc) && $loc=="Ventura") echo 'selected="true"';?>>Ventura</option>
+                      <option value="" <?php if (!isset($loc)) ?><?= 'selected="true"' ?>>--Please Choose One--</option>
+                      <option value="Batam" <?php if (isset($loc) && $loc=="Batam") ?><?= 'selected="true"' ?>>Batam</option>
+                      <option value="Cikarang" <?php if (isset($loc) && $loc=="Cikarang") ?><?= 'selected="true"' ?>>Cikarang</option>
+                      <option value="Pel" <?php if (isset($loc) && $loc=="Pel") ?><?= 'selected="true"' ?>>Pel</option>
+                      <option value="Pem" <?php if (isset($loc) && $loc=="Pem") ?><?= 'selected="true"' ?>>Pem</option>
+                      <option value="Sensor" <?php if (isset($loc) && $loc=="Sensor") ?><?= 'selected="true"' ?>>Sensor</option>
+                      <option value="Surabaya" <?php if (isset($loc) && $loc=="Surabaya") ?><?= 'selected="true"' ?>>Surabaya</option>
+                      <option value="Trafo" <?php if (isset($loc) && $loc=="Trafo") ?><?= 'selected="true"' ?>>Trafo</option>
+                      <option value="Ventura" <?php if (isset($loc) && $loc=="Ventura") ?><?= 'selected="true"' ?>>Ventura</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputTujuanInG" class="col-sm-2 col-form-label">Tujuan</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputTujuanInG" name="inputTujuanInG" placeholder="Person you want to visit" value="<?php echo $tujuan; ?>" required></input>
+                    <input type="text" class="form-control" id="inputTujuanInG" name="inputTujuanInG" placeholder="Person you want to visit" value="<?= $tujuan ?>" required></input>
                   </div>  
                 </div>
                 <div class="form-group row">
                   <label for="KeperluanInG" class="col-sm-2 col-form-label">Keperluan</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="KeperluanInG" name="KeperluanInG" placeholder="Purpose of your visit" required><?php echo $keperluan; ?></textarea>
+                    <textarea class="form-control" id="KeperluanInG" name="KeperluanInG" placeholder="Purpose of your visit" required><?= $keperluan ?></textarea>
                   </div>
                 </div>
               </div>
@@ -346,7 +350,7 @@
         	        <div class="form-group row">
             	      <label for="staticCodeS" class="col-sm-2 col-form-label">Guest ID</label>
                 	  <div class="col-sm-1">
-                    	<input type="text" readonly class="form-control-plaintext mx-sm-1" name="staticCodeS" id="staticCodeS" aria-describedby="reminder" value="<?php echo $Code; ?>"></input>
+                    	<input type="text" readonly class="form-control-plaintext mx-sm-1" name="staticCodeS" id="staticCodeS" aria-describedby="reminder" value="<?= $Code ?>"></input>
                     </div>
                     <small id="reminder" class="text-muted col-form-label" style="position: absolute; left: 200px; top: 20px;">
                       <h1 style="font-size: 12px; top: 50px; color: #F4170C">*Please remember your Guest ID</h1>
@@ -418,7 +422,7 @@
                   <div class="form-group row">
 	           				<label for="staticCodeG" class="col-sm-2 col-form-label">Group ID</label>
              				<div class="col-sm-1">
-        	            <input type="text" readonly class="form-control-plaintext" name="staticCodeG" id="staticCodeG" value="<?php echo $Code; ?>"></input>
+        	            <input type="text" readonly class="form-control-plaintext" name="staticCodeG" id="staticCodeG" value="<?= $Code ?>"></input>
             	      </div>
                     <small id="reminder" class="text-muted col-form-label" style="position: absolute; left: 200px; top: 20px;">
                       <h1 style="font-size: 12px; top: 50px; color: #F4170C">*Please remember your Guest ID</h1>
