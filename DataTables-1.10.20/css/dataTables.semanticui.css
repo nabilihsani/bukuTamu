@@ -4,6 +4,7 @@
 table.dataTable.table {
   margin: 0;
 }
+
 table.dataTable.table thead th,
 table.dataTable.table thead td {
   position: relative;
