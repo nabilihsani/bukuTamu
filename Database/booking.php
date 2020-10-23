@@ -37,12 +37,15 @@
     $result = $db->query($query);
     $query1 = " INSERT INTO kunjungan (idTamu, Tujuan, Keperluan, Status) VALUES('$id', '$tujuan', '$keperluan', 'Booking')";
     $result1 = $db->query($query1);
-    
-    echo "<script type='text/javascript'>
+ ?>
+<?=
+    "<script type='text/javascript'>
     $(document).ready(function() {
     $('#modal5').modal('show');
     });
-    </script>";
+    </script>"
+ ?>
+<?php
   }
   $a = filter_input(INPUT_POST, 'submitG');    
   if (isset($a)) {
@@ -60,13 +63,16 @@
     $result = $db->query($query);
     $query1 = " INSERT INTO grupvisit (grupId, visitorName, visitPhone, visitorEmail, visitCount, Tujuan, Keperluan, Status) VALUES('$id', '$name', '$telp', '$email', '$groupPerson', '$tujuan', '$keperluan', 'Booking')";
     $result1 = $db->query($query1);
-
-    echo "<script type='text/javascript'>
+ ?>
+<?=
+    "<script type='text/javascript'>
     $(document).ready(function() {
     $('#modal5').modal('show');
     });
-    </script>";
+    </script>"
+ ?>
+<?php
   }
 
     $db->close();
-  ?>
+ ?>
