@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php 
 	session_start();
-	include("Database/function.php");
+	include 'Database/function.php';
 	if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true){
     	if (isLoginSessionExpired()) {
     		header("Location:Database/logout.php?session_expired=1");
@@ -51,7 +51,7 @@
 			</li>
 		</ul>
 		<ul class="navbar-nav ml-auto ml-md-0">
-			<span style="position: relative; top: 7px; left: 5px; color: #fff;"><?php echo htmlspecialchars($_SESSION["Nama"]); ?></span>
+			<span style="position: relative; top: 7px; left: 5px; color: #fff;"><?= htmlspecialchars($_SESSION["Nama"]) ?></span>
 			<li class="nav-item dropdown" style="color: #fff;">
         		<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff">
           			<i class="fas fa-user-circle fa-fw"></i>
@@ -98,7 +98,7 @@
 								<div class="card-body-icon" style="display: block; top: -1rem; position: absolute; right: 0rem; font-size: 5rem; opacity: 0.4; transform: rotate(15deg);">
 									<i class="fas fa-walking"></i>
 								</div>
-								<div class="mr-5"><?php echo $numRow+$numRow1; ?> Total Visitor Today</div>
+								<div class="mr-5"><?= $numRow+$numRow1 ?> Total Visitor Today</div>
 							</div>
 							<a class="card-footer text-white clearfix small z-1" href="#">
 								<!-- <span class="float-left">View Details</span>
@@ -113,7 +113,7 @@
 								<div class="card-body-icon" style="display: block; top: -1rem; position: absolute; right: -1rem; font-size: 5rem; opacity: 0.4; transform: rotate(15deg);">
 									<i class="fas fa-user fa-fw"></i>
 								</div>
-								<div class="mr-5"><?php echo $numRow2+$numRow3 ?> Active Visit</div>
+								<div class="mr-5"><? $numRow2+$numRow3 ?> Active Visit</div>
 							</div>
 							<a class="card-footer text-white clearfix small z-1" href="activeVisit.php"><!-- 
 								<span class="float-left">View Details</span>
@@ -129,7 +129,7 @@
 								<div class="card-body-icon" style="display: block; top: -1rem; position: absolute; right: 0rem; font-size: 5rem; opacity: 0.4; transform: rotate(15deg);">
 											<i class="fas fa-users fa-fw"></i>
 								</div>
-								<div class="mr-5"><?php echo $numRow4+$numRow5; ?> Check Out!</div>
+								<div class="mr-5"><?= $numRow4+$numRow5 ?> Check Out!</div>
 							</div>
 							<a class="card-footer text-white clearfix small z-1" href="#">
 								<!-- <span class="float-left">View Details</span>
@@ -145,7 +145,7 @@
 								<div class="card-body-icon" style="display: block; top: -1rem; position: absolute; right: 0.7rem; font-size: 5rem; opacity: 0.4; transform: rotate(15deg);">
 									<i class="fa fa-book" aria-hidden="true"></i>
 								</div>
-								<div class="mr-5"><?php echo $numRow6+$numRow7; ?> New Booking Visit!</div>
+								<div class="mr-5"><?= $numRow6+$numRow7 ?> New Booking Visit!</div>
 							</div>
 							<a class="card-footer text-white clearfix small z-1" href="#">
 								<!-- <span class="float-left">View Details</span>
@@ -484,12 +484,7 @@
     	</div>
   	</div>
 	<?php 
-		require_once('Database/db_login.php');
-    	$db = new mysqli($db_host, $db_username, $db_password, $db_database);
-    	if ($db->connect_errno) {
-    		die ("Could not connect to the database: <br />"). $db->connect_errno;
-    	}
-	
+		include 'Database/db_login.php';
 		$result = $db->query("SELECT COUNT(a.idTamu), b.Company FROM kunjungan as a INNER JOIN tamu as b ON a.idTamu = b.idTamu GROUP BY Company");
 		$numRow = $result->num_rows;
 		while ($row1 = mysqli_fetch_row($result)) {
@@ -505,18 +500,18 @@
 	 ?>
 
 	<script type="text/javascript">
-		var companyS = <?php echo json_encode($row); ?>;
-		var companyG = <?php echo json_encode($row1); ?>;
-		var val = <?php echo $numRow ?>;
-		var val1 = <?php echo $numRow1 ?>;
+		var companyS = <?= json_encode($row) ?>;
+		var companyG = <?= json_encode($row1) ?>;
+		var val = <?= $numRow ?>;
+		var val1 = <?= $numRow1 ?>;
 		function random_rgba() {
     		var o = Math.round, r = Math.random, s = 255;
     		return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
 		}
 		var a = [];
 		var b = [];
-		var countS = <?php echo json_encode($rows); ?>;
-		var countG = <?php echo json_encode($rows1); ?>;
+		var countS = <?= json_encode($rows) ?>;
+		var countG = <?= json_encode($rows1) ?>;
 		var j = 0;
 		for (var i = 0; i < val; i++) {
 			a.push(companyS[i]);
@@ -596,36 +591,36 @@
 					$numRow = $result->num_rows;
 					$result1 = $db->query("SELECT * FROM `grupvisit` WHERE WEEKDAY(MASUK) = 0 AND YEARWEEK(Masuk) = YEARWEEK(NOW())");
 					$numRow1 = $result1->num_rows;
-					echo $numRow+$numRow1;
-					 ?>,
+		    			 ?>
+					<?= $numRow+$numRow1 ?>,
 					<?php 
 					$result = $db->query("SELECT * FROM `kunjungan` WHERE WEEKDAY(MASUK) = 1 AND YEARWEEK(Masuk) = YEARWEEK(NOW())");
 					$numRow = $result->num_rows;
 					$result1 = $db->query("SELECT * FROM `grupvisit` WHERE WEEKDAY(MASUK) = 1 AND YEARWEEK(Masuk) = YEARWEEK(NOW())");
 					$numRow1 = $result1->num_rows;
-					echo $numRow+$numRow1;
-					 ?>,
+					 ?>
+					<?= $numRow+$numRow1 ?>,
 					<?php 
 					$result = $db->query("SELECT * FROM `kunjungan` WHERE WEEKDAY(MASUK) = 2 AND YEARWEEK(Masuk) = YEARWEEK(NOW())");
 					$numRow = $result->num_rows;
 					$result1 = $db->query("SELECT * FROM `grupvisit` WHERE WEEKDAY(MASUK) = 2 AND YEARWEEK(Masuk) = YEARWEEK(NOW())");
 					$numRow1 = $result1->num_rows;
-					echo $numRow+$numRow1;
-					 ?>,
+					 ?>
+					<?= $numRow+$numRow1 ?>,
 					<?php 
 					$result = $db->query("SELECT * FROM `kunjungan` WHERE WEEKDAY(MASUK) = 3 AND YEARWEEK(Masuk) = YEARWEEK(NOW())");
 					$numRow = $result->num_rows;
 					$result1 = $db->query("SELECT * FROM `grupvisit` WHERE WEEKDAY(MASUK) = 3 AND YEARWEEK(Masuk) = YEARWEEK(NOW())");
 					$numRow1 = $result1->num_rows;
-					echo $numRow+$numRow1;
-					 ?>,
+					 ?>
+					<?= $numRow+$numRow1 ?>,
 					<?php 
 					$result = $db->query("SELECT * FROM `kunjungan` WHERE WEEKDAY(MASUK) = 4 AND YEARWEEK(Masuk) = YEARWEEK(NOW())");
 					$numRow = $result->num_rows;
 					$result1 = $db->query("SELECT * FROM `grupvisit` WHERE WEEKDAY(MASUK) = 4 AND YEARWEEK(Masuk) = YEARWEEK(NOW())");
 					$numRow1 = $result1->num_rows;
-					echo $numRow+$numRow1;
 					 ?>
+					<?= $numRow+$numRow1 ?>
 					],
 					fill: false,
 					backgroundColor: [
