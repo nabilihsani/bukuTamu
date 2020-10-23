@@ -11,13 +11,13 @@
  * for further information.
  */
 (function( factory ){
-	if ( typeof define === 'function' && define.amd ) {
+	if ( typeof define === "function" && define.amd ) {
 		// AMD
-		define( ['jquery', 'datatables.net'], function ( $ ) {
+		define( ["jquery", "datatables.net"], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
-	else if ( typeof exports === 'object' ) {
+	else if ( typeof exports === "object" ) {
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
@@ -25,7 +25,7 @@
 			}
 
 			if ( ! $ || ! $.fn.dataTable ) {
-				$ = require('datatables.net')(root, $).$;
+				$ = require("datatables.net")(root, $).$;
 			}
 
 			return factory( $, root, root.document );
@@ -36,12 +36,12 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-'use strict';
+"use strict";
 var DataTable = $.fn.dataTable;
 
 // Detect Foundation 5 / 6 as they have different element and class requirements
-var meta = $('<meta class="foundation-mq"/>').appendTo('head');
-DataTable.ext.foundationVersion = meta.css('font-family').match(/small|medium|large/) ? 6 : 5;
+var meta = $("<meta class="foundation-mq"/>").appendTo("head");
+DataTable.ext.foundationVersion = meta.css("font-family").match(/small|medium|large/) ? 6 : 5;
 meta.remove();
 
 
@@ -57,7 +57,7 @@ $.extend( true, DataTable.defaults, {
 		"<'row grid-x'<'small-6 columns cell'l><'small-6 columns cell'f>r>"+
 		"t"+
 		"<'row grid-x'<'small-6 columns cell'i><'small-6 columns cell'p>>",
-	renderer: 'foundation'
+	renderer: "foundation"
 } );
 
 
@@ -75,8 +75,8 @@ DataTable.ext.renderer.pageButton.foundation = function ( settings, host, idx, b
 		var i, ien, node, button;
 		var clickHandler = function ( e ) {
 			e.preventDefault();
-			if ( !$(e.currentTarget).hasClass('unavailable') && api.page() != e.data.action ) {
-				api.page( e.data.action ).draw( 'page' );
+			if ( !$(e.currentTarget).hasClass("unavailable") && api.page() !== e.data.action ) {
+				api.page( e.data.action ).draw( "page" );
 			}
 		};
 
@@ -87,70 +87,70 @@ DataTable.ext.renderer.pageButton.foundation = function ( settings, host, idx, b
 				attach( container, button );
 			}
 			else {
-				btnDisplay = '';
-				btnClass = '';
+				btnDisplay = "";
+				btnClass = "";
 				tag = null;
 
 				switch ( button ) {
-					case 'ellipsis':
-						btnDisplay = '&#x2026;';
-						btnClass = 'unavailable disabled';
+					case "ellipsis":
+						btnDisplay = "&#x2026;";
+						btnClass = "unavailable disabled";
 						tag = null;
 						break;
 
-					case 'first':
+					case "first":
 						btnDisplay = lang.sFirst;
 						btnClass = button + (page > 0 ?
-							'' : ' unavailable disabled');
-						tag = page > 0 ? 'a' : null;
+							"" : " unavailable disabled");
+						tag = page > 0 ? "a" : null;
 						break;
 
-					case 'previous':
+					case "previous":
 						btnDisplay = lang.sPrevious;
 						btnClass = button + (page > 0 ?
-							'' : ' unavailable disabled');
-						tag = page > 0 ? 'a' : null;
+							"" : " unavailable disabled");
+						tag = page > 0 ? "a" : null;
 						break;
 
-					case 'next':
+					case "next":
 						btnDisplay = lang.sNext;
 						btnClass = button + (page < pages-1 ?
-							'' : ' unavailable disabled');
-						tag = page < pages-1 ? 'a' : null;
+							"" : " unavailable disabled");
+						tag = page < pages-1 ? "a" : null;
 						break;
 
-					case 'last':
+					case "last":
 						btnDisplay = lang.sLast;
 						btnClass = button + (page < pages-1 ?
-							'' : ' unavailable disabled');
-						tag = page < pages-1 ? 'a' : null;
+							"" : " unavailable disabled");
+						tag = page < pages-1 ? "a" : null;
 						break;
 
 					default:
 						btnDisplay = button + 1;
 						btnClass = page === button ?
-							'current' : '';
+							"current" : "";
 						tag = page === button ?
-							null : 'a';
+							null : "a";
 						break;
 				}
 
 				if ( v5 ) {
-					tag = 'a';
+					tag = "a";
 				}
 
 				if ( btnDisplay ) {
-					node = $('<li>', {
-							'class': classes.sPageButton+' '+btnClass,
-							'aria-controls': settings.sTableId,
-							'aria-label': aria[ button ],
-							'tabindex': settings.iTabIndex,
-							'id': idx === 0 && typeof button === 'string' ?
-								settings.sTableId +'_'+ button :
+					node = $("<li>", {
+							"class": classes.sPageButton+" "+btnClass,
+							"aria-controls": settings.sTableId,
+							"aria-label": aria[ button ],
+							"tabindex": settings.iTabIndex,
+							"id": idx === 0 && typeof button === "string" ?
+								settings.sTableId +"_"+ button :
 								null
 						} )
 						.append( tag ?
-							$('<'+tag+'/>', {'href': '#'} ).html( btnDisplay ) :
+							$("<"+tag+"/>", {"href": "#"} ).html( btnDisplay ) :
 							btnDisplay
 						)
 						.appendTo( container );
@@ -164,7 +164,7 @@ DataTable.ext.renderer.pageButton.foundation = function ( settings, host, idx, b
 	};
 
 	attach(
-		$(host).empty().html('<ul class="pagination"/>').children('ul'),
+		$(host).empty().html("<ul class="pagination"/>").children("ul"),
 		buttons
 	);
 };
