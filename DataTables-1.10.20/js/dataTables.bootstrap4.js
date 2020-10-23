@@ -11,13 +11,13 @@
  * for further information.
  */
 (function( factory ){
-	if ( typeof define === 'function' && define.amd ) {
+	if ( typeof define === "function" && define.amd ) {
 		// AMD
-		define( ['jquery', 'datatables.net'], function ( $ ) {
+		define( ["jquery", "datatables.net"], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
-	else if ( typeof exports === 'object' ) {
+	else if ( typeof exports === "object" ) {
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
@@ -28,7 +28,7 @@
 				// Require DataTables, which attaches to jQuery, including
 				// jQuery if needed and have a $ property so we can access the
 				// jQuery object that is used
-				$ = require('datatables.net')(root, $).$;
+				$ = require("datatables.net")(root, $).$;
 			}
 
 			return factory( $, root, root.document );
@@ -39,7 +39,7 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-'use strict';
+"use strict";
 var DataTable = $.fn.dataTable;
 
 
@@ -49,7 +49,7 @@ $.extend( true, DataTable.defaults, {
 		"<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
 		"<'row'<'col-sm-12'tr>>" +
 		"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-	renderer: 'bootstrap'
+	renderer: "bootstrap"
 } );
 
 
@@ -75,8 +75,8 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 		var i, ien, node, button;
 		var clickHandler = function ( e ) {
 			e.preventDefault();
-			if ( !$(e.currentTarget).hasClass('disabled') && api.page() != e.data.action ) {
-				api.page( e.data.action ).draw( 'page' );
+			if ( !$(e.currentTarget).hasClass("disabled") && api.page() !== e.data.action ) {
+				api.page( e.data.action ).draw( "page" );
 			}
 		};
 
@@ -87,60 +87,60 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 				attach( container, button );
 			}
 			else {
-				btnDisplay = '';
-				btnClass = '';
+				btnDisplay = "";
+				btnClass = "";
 
 				switch ( button ) {
-					case 'ellipsis':
-						btnDisplay = '&#x2026;';
-						btnClass = 'disabled';
+					case "ellipsis":
+						btnDisplay = "&#x2026;";
+						btnClass = "disabled";
 						break;
 
-					case 'first':
+					case "first":
 						btnDisplay = lang.sFirst;
 						btnClass = button + (page > 0 ?
-							'' : ' disabled');
+							"" : " disabled");
 						break;
 
-					case 'previous':
+					case "previous":
 						btnDisplay = lang.sPrevious;
 						btnClass = button + (page > 0 ?
-							'' : ' disabled');
+							"" : " disabled");
 						break;
 
-					case 'next':
+					case "next":
 						btnDisplay = lang.sNext;
 						btnClass = button + (page < pages-1 ?
-							'' : ' disabled');
+							"" : " disabled");
 						break;
 
-					case 'last':
+					case "last":
 						btnDisplay = lang.sLast;
 						btnClass = button + (page < pages-1 ?
-							'' : ' disabled');
+							"" : " disabled");
 						break;
 
 					default:
 						btnDisplay = button + 1;
 						btnClass = page === button ?
-							'active' : '';
+							"active" : "";
 						break;
 				}
 
 				if ( btnDisplay ) {
-					node = $('<li>', {
-							'class': classes.sPageButton+' '+btnClass,
-							'id': idx === 0 && typeof button === 'string' ?
-								settings.sTableId +'_'+ button :
+					node = $("<li>", {
+							"class": classes.sPageButton+" "+btnClass,
+							"id": idx === 0 && typeof button === "string" ?
+								settings.sTableId +"_"+ button :
 								null
 						} )
-						.append( $('<a>', {
-								'href': '#',
-								'aria-controls': settings.sTableId,
-								'aria-label': aria[ button ],
-								'data-dt-idx': counter,
-								'tabindex': settings.iTabIndex,
-								'class': 'page-link'
+						.append( $("<a>", {
+								"href": "#",
+								"aria-controls": settings.sTableId,
+								"aria-label": aria[ button ],
+								"data-dt-idx": counter,
+								"tabindex": settings.iTabIndex,
+								"class": "page-link"
 							} )
 							.html( btnDisplay )
 						)
@@ -165,17 +165,17 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 		// elements, focus is lost on the select button which is bad for
 		// accessibility. So we want to restore focus once the draw has
 		// completed
-		activeEl = $(host).find(document.activeElement).data('dt-idx');
+		activeEl = $(host).find(document.activeElement).data("dt-idx");
 	}
 	catch (e) {}
 
 	attach(
-		$(host).empty().html('<ul class="pagination"/>').children('ul'),
+		$(host).empty().html("<ul class="pagination"/>").children("ul"),
 		buttons
 	);
 
 	if ( activeEl !== undefined ) {
-		$(host).find( '[data-dt-idx='+activeEl+']' ).focus();
+		$(host).find( "[data-dt-idx="+activeEl+"]" ).focus();
 	}
 };
 
