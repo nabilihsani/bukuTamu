@@ -3,13 +3,13 @@
  */
 
 (function( factory ){
-	if ( typeof define === 'function' && define.amd ) {
+	if ( typeof define === "function" && define.amd ) {
 		// AMD
-		define( ['jquery', 'datatables.net-zf', 'datatables.net-buttons'], function ( $ ) {
+		define( ["jquery", "datatables.net-zf", "datatables.net-buttons"], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
-	else if ( typeof exports === 'object' ) {
+	else if ( typeof exports === "object" ) {
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
@@ -17,11 +17,11 @@
 			}
 
 			if ( ! $ || ! $.fn.dataTable ) {
-				$ = require('datatables.net-zf')(root, $).$;
+				$ = require("datatables.net-zf")(root, $).$;
 			}
 
 			if ( ! $.fn.dataTable.Buttons ) {
-				require('datatables.net-buttons')(root, $);
+				require("datatables.net-buttons")(root, $);
 			}
 
 			return factory( $, root, root.document );
@@ -32,7 +32,7 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-'use strict';
+"use strict";
 var DataTable = $.fn.dataTable;
 
 
@@ -41,37 +41,37 @@ var DataTable = $.fn.dataTable;
 // the same file, but not that this requires DataTables 1.10.11+ for F6 support.
 var collection = DataTable.ext.foundationVersion === 6 ?
 	{
-		tag: 'div',
-		className: 'dropdown-pane is-open button-group stacked'
+		tag: "div",
+		className: "dropdown-pane is-open button-group stacked"
 	} :
 	{
-		tag: 'ul',
-		className: 'f-dropdown open dropdown-pane is-open',
+		tag: "ul",
+		className: "f-dropdown open dropdown-pane is-open",
 		button: {
-			tag: 'li',
-			className: 'small',
-			active: 'active',
-			disabled: 'disabled'
+			tag: "li",
+			className: "small",
+			active: "active",
+			disabled: "disabled"
 		},
 		buttonLiner: {
-			tag: 'a'
+			tag: "a"
 		}
 	};
 
 $.extend( true, DataTable.Buttons.defaults, {
 	dom: {
 		container: {
-			tag: 'div',
-			className: 'dt-buttons button-group'
+			tag: "div",
+			className: "dt-buttons button-group"
 		},
 		buttonContainer: {
 			tag: null,
-			className: ''
+			className: ""
 		},
 		button: {
-			tag: 'a',
-			className: 'button small',
-			active: 'secondary'
+			tag: "a",
+			className: "button small",
+			active: "secondary"
 		},
 		buttonLiner: {
 			tag: null
@@ -81,7 +81,7 @@ $.extend( true, DataTable.Buttons.defaults, {
 } );
 
 
-DataTable.ext.buttons.collection.className = 'dropdown';
+DataTable.ext.buttons.collection.className = "dropdown";
 
 
 return DataTable.Buttons;
