@@ -11,13 +11,13 @@
  * for further information.
  */
 (function( factory ){
-	if ( typeof define === 'function' && define.amd ) {
+	if ( typeof define === "function" && define.amd ) {
 		// AMD
-		define( ['jquery', 'datatables.net'], function ( $ ) {
+		define( ["jquery", "datatables.net"], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
-	else if ( typeof exports === 'object' ) {
+	else if ( typeof exports === "object" ) {
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
@@ -25,7 +25,7 @@
 			}
 
 			if ( ! $ || ! $.fn.dataTable ) {
-				$ = require('datatables.net')(root, $).$;
+				$ = require("datatables.net")(root, $).$;
 			}
 
 			return factory( $, root, root.document );
@@ -36,20 +36,20 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-'use strict';
+"use strict";
 var DataTable = $.fn.dataTable;
 
 
-var sort_prefix = 'css_right ui-icon ui-icon-';
-var toolbar_prefix = 'fg-toolbar ui-toolbar ui-widget-header ui-helper-clearfix ui-corner-';
+var sort_prefix = "css_right ui-icon ui-icon-";
+var toolbar_prefix = "fg-toolbar ui-toolbar ui-widget-header ui-helper-clearfix ui-corner-";
 
 /* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
-		'<"'+toolbar_prefix+'tl ui-corner-tr"lfr>'+
-		't'+
-		'<"'+toolbar_prefix+'bl ui-corner-br"ip>',
-	renderer: 'jqueryui'
+		"<""+toolbar_prefix"tl ui-corner-tr"lfr>"+
+		"t"+
+		"<""+toolbar_prefix+"bl ui-corner-br"ip>",
+	renderer: "jqueryui"
 } );
 
 
@@ -86,31 +86,31 @@ $.extend( DataTable.ext.classes, {
 
 DataTable.ext.renderer.header.jqueryui = function ( settings, cell, column, classes ) {
 	// Calculate what the unsorted class should be
-	var noSortAppliedClass = sort_prefix+'caret-2-n-s';
-	var asc = $.inArray('asc', column.asSorting) !== -1;
-	var desc = $.inArray('desc', column.asSorting) !== -1;
+	var noSortAppliedClass = sort_prefix+"caret-2-n-s";
+	var asc = $.inArray("asc", column.asSorting) !== -1;
+	var desc = $.inArray("desc", column.asSorting) !== -1;
 
 	if ( !column.bSortable || (!asc && !desc) ) {
-		noSortAppliedClass = '';
+		noSortAppliedClass = "";
 	}
 	else if ( asc && !desc ) {
-		noSortAppliedClass = sort_prefix+'caret-1-n';
+		noSortAppliedClass = sort_prefix+"caret-1-n";
 	}
 	else if ( !asc && desc ) {
-		noSortAppliedClass = sort_prefix+'caret-1-s';
+		noSortAppliedClass = sort_prefix+"caret-1-s";
 	}
 
 	// Setup the DOM structure
-	$('<div/>')
-		.addClass( 'DataTables_sort_wrapper' )
+	$("<div/>")
+		.addClass( "DataTables_sort_wrapper" )
 		.append( cell.contents() )
-		.append( $('<span/>')
-			.addClass( classes.sSortIcon+' '+noSortAppliedClass )
+		.append( $("<span/>")
+			.addClass( classes.sSortIcon+" "+noSortAppliedClass )
 		)
 		.appendTo( cell );
 
 	// Attach a sort listener to update on sort
-	$(settings.nTable).on( 'order.dt', function ( e, ctx, sorting, columns ) {
+	$(settings.nTable).on( "order.dt", function ( e, ctx, sorting, columns ) {
 		if ( settings !== ctx ) {
 			return;
 		}
@@ -119,24 +119,24 @@ DataTable.ext.renderer.header.jqueryui = function ( settings, cell, column, clas
 
 		cell
 			.removeClass( classes.sSortAsc +" "+classes.sSortDesc )
-			.addClass( columns[ colIdx ] == 'asc' ?
-				classes.sSortAsc : columns[ colIdx ] == 'desc' ?
+			.addClass( columns[ colIdx ] == "asc" ?
+				classes.sSortAsc : columns[ colIdx ] == "desc" ?
 					classes.sSortDesc :
 					column.sSortingClass
 			);
 
 		cell
-			.find( 'span.'+classes.sSortIcon )
+			.find( "span."+classes.sSortIcon )
 			.removeClass(
-				sort_prefix+'triangle-1-n' +" "+
-				sort_prefix+'triangle-1-s' +" "+
-				sort_prefix+'caret-2-n-s' +" "+
-				sort_prefix+'caret-1-n' +" "+
-				sort_prefix+'caret-1-s'
+				sort_prefix+"triangle-1-n" +" "+
+				sort_prefix+"triangle-1-s" +" "+
+				sort_prefix+"caret-2-n-s" +" "+
+				sort_prefix+"caret-1-n" +" "+
+				sort_prefix+"caret-1-s"
 			)
-			.addClass( columns[ colIdx ] == 'asc' ?
-				sort_prefix+'triangle-1-n' : columns[ colIdx ] == 'desc' ?
-					sort_prefix+'triangle-1-s' :
+			.addClass( columns[ colIdx ] == "asc" ?
+				sort_prefix+"triangle-1-n" : columns[ colIdx ] == "desc" ?
+					sort_prefix+"triangle-1-s" :
 					noSortAppliedClass
 			);
 	} );
