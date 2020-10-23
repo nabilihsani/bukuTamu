@@ -11,13 +11,13 @@
  * for further information.
  */
 (function( factory ){
-	if ( typeof define === 'function' && define.amd ) {
+	if ( typeof define === "function" && define.amd ) {
 		// AMD
-		define( ['jquery', 'datatables.net'], function ( $ ) {
+		define( ["jquery", "datatables.net"], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
-	else if ( typeof exports === 'object' ) {
+	else if ( typeof exports === "object" ) {
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
@@ -28,7 +28,7 @@
 				// Require DataTables, which attaches to jQuery, including
 				// jQuery if needed and have a $ property so we can access the
 				// jQuery object that is used
-				$ = require('datatables.net')(root, $).$;
+				$ = require("datatables.net")(root, $).$;
 			}
 
 			return factory( $, root, root.document );
@@ -39,7 +39,7 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-'use strict';
+"use strict";
 var DataTable = $.fn.dataTable;
 
 
@@ -59,7 +59,7 @@ $.extend( true, DataTable.defaults, {
 				"<'right aligned nine wide column'p>"+
 			">"+
 		">",
-	renderer: 'semanticUI'
+	renderer: "semanticUI"
 } );
 
 
@@ -84,8 +84,8 @@ DataTable.ext.renderer.pageButton.semanticUI = function ( settings, host, idx, b
 		var i, ien, node, button;
 		var clickHandler = function ( e ) {
 			e.preventDefault();
-			if ( !$(e.currentTarget).hasClass('disabled') && api.page() != e.data.action ) {
-				api.page( e.data.action ).draw( 'page' );
+			if ( !$(e.currentTarget).hasClass("disabled") && api.page() !== e.data.action ) {
+				api.page( e.data.action ).draw( "page" );
 			}
 		};
 
@@ -96,61 +96,61 @@ DataTable.ext.renderer.pageButton.semanticUI = function ( settings, host, idx, b
 				attach( container, button );
 			}
 			else {
-				btnDisplay = '';
-				btnClass = '';
+				btnDisplay = "";
+				btnClass = "";
 
 				switch ( button ) {
-					case 'ellipsis':
-						btnDisplay = '&#x2026;';
-						btnClass = 'disabled';
+					case "ellipsis":
+						btnDisplay = "&#x2026;";
+						btnClass = "disabled";
 						break;
 
-					case 'first':
+					case "first":
 						btnDisplay = lang.sFirst;
 						btnClass = button + (page > 0 ?
-							'' : ' disabled');
+							"" : " disabled");
 						break;
 
-					case 'previous':
+					case "previous":
 						btnDisplay = lang.sPrevious;
 						btnClass = button + (page > 0 ?
-							'' : ' disabled');
+							"" : " disabled");
 						break;
 
-					case 'next':
+					case "next":
 						btnDisplay = lang.sNext;
 						btnClass = button + (page < pages-1 ?
-							'' : ' disabled');
+							"" : " disabled");
 						break;
 
-					case 'last':
+					case "last":
 						btnDisplay = lang.sLast;
 						btnClass = button + (page < pages-1 ?
-							'' : ' disabled');
+							"" : " disabled");
 						break;
 
 					default:
 						btnDisplay = button + 1;
 						btnClass = page === button ?
-							'active' : '';
+							"active" : "";
 						break;
 				}
 
-				var tag = btnClass.indexOf( 'disabled' ) === -1 ?
-					'a' :
-					'div';
+				var tag = btnClass.indexOf( "disabled" ) === -1 ?
+					"a" :
+					"div";
 
 				if ( btnDisplay ) {
-					node = $('<'+tag+'>', {
-							'class': classes.sPageButton+' '+btnClass,
-							'id': idx === 0 && typeof button === 'string' ?
-								settings.sTableId +'_'+ button :
+					node = $("<"+tag+">", {
+							"class": classes.sPageButton+" "+btnClass,
+							"id": idx === 0 && typeof button === "string" ?
+								settings.sTableId +"_"+ button :
 								null,
-							'href': '#',
-							'aria-controls': settings.sTableId,
-							'aria-label': aria[ button ],
-							'data-dt-idx': counter,
-							'tabindex': settings.iTabIndex
+							"href": "#",
+							"aria-controls": settings.sTableId,
+							"aria-label": aria[ button ],
+							"data-dt-idx": counter,
+							"tabindex': settings.iTabIndex
 						} )
 						.html( btnDisplay )
 						.appendTo( container );
@@ -174,24 +174,24 @@ DataTable.ext.renderer.pageButton.semanticUI = function ( settings, host, idx, b
 		// elements, focus is lost on the select button which is bad for
 		// accessibility. So we want to restore focus once the draw has
 		// completed
-		activeEl = $(host).find(document.activeElement).data('dt-idx');
+		activeEl = $(host).find(document.activeElement).data("dt-idx");
 	}
 	catch (e) {}
 
 	attach(
-		$(host).empty().html('<div class="ui stackable pagination menu"/>').children(),
+		$(host).empty().html("<div class="ui stackable pagination menu"/>").children(),
 		buttons
 	);
 
 	if ( activeEl !== undefined ) {
-		$(host).find( '[data-dt-idx='+activeEl+']' ).focus();
+		$(host).find( "[data-dt-idx="+activeEl+"]" ).focus();
 	}
 };
 
 
 // Javascript enhancements on table initialisation
-$(document).on( 'init.dt', function (e, ctx) {
-	if ( e.namespace !== 'dt' ) {
+$(document).on( "init.dt", function (e, ctx) {
+	if ( e.namespace !== "dt" ) {
 		return;
 	}
 
@@ -199,12 +199,12 @@ $(document).on( 'init.dt', function (e, ctx) {
 
 	// Length menu drop down
 	if ( $.fn.dropdown ) {
-		$( 'div.dataTables_length select', api.table().container() ).dropdown();
+		$( "div.dataTables_length select", api.table().container() ).dropdown();
 	}
 
 	// Filtering input
-	$( 'div.dataTables_filter.ui.input', api.table().container() ).removeClass('input').addClass('form');
-	$( 'div.dataTables_filter input', api.table().container() ).wrap( '<span class="ui input" />' );
+	$( "div.dataTables_filter.ui.input", api.table().container() ).removeClass("input").addClass("form");
+	$( "div.dataTables_filter input", api.table().container() ).wrap( "<span class="ui input" />" );
 } );
 
 
