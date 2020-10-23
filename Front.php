@@ -83,12 +83,16 @@
                     <datalist id="idOut">
                       <?php 
                         while ($row = mysqli_fetch_array($re)) {
-                          echo "<option value='".$row['idTamu']."'>".$row['Nama']."</option>";
-                        }
+		       ?>
+                          <?= "<option value='".$row['idTamu']."'>".$row['Nama']."</option>" ?>
+                      <?php 
+			}
                         while ($row = mysqli_fetch_array($reG)) {
-                          echo "<option value='".$row['grupId']."'>".$row['grupName']."</option>";
+		       ?>
+                          <?= "<option value='".$row['grupId']."'>".$row['grupName']."</option>" ?>
+		      <?php	    
                         }
-                      ?>
+                       ?>
                     </datalist> 
                   </input>
             		</div>
