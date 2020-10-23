@@ -106,16 +106,10 @@
         <?= '</tr>' ?>
 <?php 
     }
-    // function testInput($data) {
-    //     $data = trim($data);
-    //     $data = stripslashes($data);
-    //     $data = htmlspecialchars($data);
-    //     return $data;
-    // }
-    if (isset($_POST["submitCodeG"])) {
-        $code2 = testInput($_POST['staticCodeInG']);
-        $code1 = testInput($_POST['inputCodeG']); 
-        
+    $a = filter_input(INPUT_POST, 'submitCodeG');
+    if (isset($a)) {
+        $code2 = filter_input(INPUT_POST, 'staticCodeInG');
+        $code1 = filter_input(INPUT_POST, 'inputCodeG');
         $query2 = "SELECT * FROM kartu WHERE Code = '$code1'";
         $result2 = $db->query($query2);
         $numRow = $result2->num_rows;
@@ -141,9 +135,10 @@
 <?php        
         }
     }
-    if (isset($_POST["submitOutG"])) {
-        $code2 = testInput($_POST['staticCodeG']);
-        $code1 = testInput($_POST['staticCodeG1']);
+    $a = filter_input(INPUT_POST, 'submitOutG');
+    if (isset($a)) {
+        $code2 = filter_input(INPUT_POST, 'staticCodeG');
+        $code1 = filter_input(INPUT_POST, 'staticCodeG1');
         $query2 = "DELETE FROM grupvisit WHERE visitId = '$code2'";
         $result2 = $db->query($query2);
         $query = "DELETE FROM grup WHERE grupId = '$code1'";
@@ -159,8 +154,9 @@
          ?>
 <?php
     }
-    if (isset($_POST["submitOutG"])) {
-        $code2 = testInput($_POST['staticCodeOutG']);
+    $a = filter_input(INPUT_POST, 'submitOutG');
+    if (isset($a)) {
+        $code2 = filter_input(INPUT_POST, 'staticCodeOutG');
         $query2 = "UPDATE grupvisit SET Keluar = CURRENT_TIMESTAMP(), Code = NULL, Status = 'Passive' WHERE visitId = '$code2'";
         $query1 = "UPDATE kartu SET id =  '-', status = 'Available' WHERE Code = (SELECT Code FROM grupvisit WHERE visitId = '$code2')";
         $result = $db->query($query1);
@@ -176,9 +172,10 @@
          ?>
 <?php         
     }
-    if (isset($_POST["submitInG"])) {
-        $code2 = testInput($_POST['staticCodeInG2']);
-        $code1 = testInput($_POST['inputCodeInG']);
+    $a = filter_input(INPUT_POST, 'submitInG');
+    if (isset($a)) {
+        $code2 = filter_input(INPUT_POST, 'staticCodeInG2');
+        $code1 = filter_input(INPUT_POST, 'inputCodeInG');
         $query3 = "SELECT * FROM kartu WHERE Code = '$code1'";
         $result3 = $db->query($query3);
         $numRow = $result3->num_rows;
