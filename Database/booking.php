@@ -1,9 +1,5 @@
 <?php 
-  require_once('db_login.php');
-  $db = new mysqli($db_host, $db_username, $db_password, $db_database);
-  if ($db->connect_errno) {
-    die ("Could not connect to the database: <br />"). $db->connect_errno;
-  }
+  include 'db_login.php';
 
   $permittedChars = '0123456789';
   function randomCode($input, $strength) {
@@ -27,23 +23,16 @@
     $Code = randomCode($permittedChars, 3);
   }
 
-  function testInput($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-
-  if (isset($_POST["submitS"])) {
-    $id = testInput($_POST['staticCodeS']);
-    $name = testInput($_POST['inputNamaS']);
-    $telp = testInput($_POST['inputPhoneS']);
-    $loc = testInput($_POST['inputLocS']);
-    $company = testInput($_POST['inputCompanyS']);
-    $email = testInput($_POST['inputEmailS']);
-    $tujuan = testInput($_POST['inputTujuanS']);
-    $keperluan = testInput($_POST['KeperluanS']);
-
+  $a = filter_input(INPUT_POST, 'submitS');
+  if (isset($a)) {
+    $id = filter_input(INPUT_POST, 'staticCodeS');
+    $name = filter_input(INPUT_POST, 'inputNamaS');
+    $telp = filter_input(INPUT_POST, 'inputPhoneS');
+    $loc = filter_input(INPUT_POST, 'inputLocS');
+    $company = filter_input(INPUT_POST, 'inputCompanyS');
+    $email = filter_input(INPUT_POST, 'inputEmailS');
+    $tujuan = filter_input(INPUT_POST, 'inputTujuanS');
+    $keperluan = filter_input(INPUT_POST, 'KeperluanS');
     $query = " INSERT INTO tamu (idTamu, Nama, Phone, Email, Company, Lokasi) VALUES('$id', '$name', '$telp', '$email', '$company', '$loc')";
     $result = $db->query($query);
     $query1 = " INSERT INTO kunjungan (idTamu, Tujuan, Keperluan, Status) VALUES('$id', '$tujuan', '$keperluan', 'Booking')";
@@ -55,19 +44,18 @@
     });
     </script>";
   }
-    
-  if (isset($_POST["submitG"])) {
-    $id = testInput($_POST['staticCodeG']);
-    $name = testInput($_POST['inputNamaG']);
-    $telp = testInput($_POST['inputPhoneG']);
-    $company = testInput($_POST['inputCompanyG']);
-    $loc = testInput($_POST['inputLocG']);
-    $group = testInput($_POST['inputGroup']);
-    $groupPerson = testInput($_POST['inputGroupPerson']);
-    $email = testInput($_POST['inputEmailG']);
-    $tujuan = testInput($_POST['inputTujuanG']);
-    $keperluan = testInput($_POST['KeperluanG']);
-
+  $a = filter_input(INPUT_POST, 'submitG');    
+  if (isset($a)) {
+    $id = filter_input(INPUT_POST, 'staticCodeG');
+    $name = filter_input(INPUT_POST, 'inputNamaG');
+    $telp = filter_input(INPUT_POST, 'inputPhoneG');
+    $company = filter_input(INPUT_POST, 'inputCompanyG');
+    $loc = filter_input(INPUT_POST, 'inputLocG');
+    $group = filter_input(INPUT_POST, 'inputGroup');
+    $groupPerson = filter_input(INPUT_POST, 'inputGroupPerson');
+    $email = filter_input(INPUT_POST, 'inputEmailG');
+    $tujuan = filter_input(INPUT_POST, 'inputTujuanG');
+    $keperluan = filter_input(INPUT_POST, 'KeperluanG');
     $query = " INSERT INTO grup (grupId, grupName, Company, Lokasi) VALUES('$id', '$group', '$company', '$loc')";
     $result = $db->query($query);
     $query1 = " INSERT INTO grupvisit (grupId, visitorName, visitPhone, visitorEmail, visitCount, Tujuan, Keperluan, Status) VALUES('$id', '$name', '$telp', '$email', '$groupPerson', '$tujuan', '$keperluan', 'Booking')";
