@@ -4,13 +4,13 @@
  */
 
 (function( factory ){
-	if ( typeof define === 'function' && define.amd ) {
+	if ( typeof define === "function" && define.amd ) {
 		// AMD
-		define( ['jquery', 'datatables.net', 'datatables.net-buttons'], function ( $ ) {
+		define( ["jquery", "datatables.net", "datatables.net-buttons"], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
-	else if ( typeof exports === 'object' ) {
+	else if ( typeof exports === "object" ) {
 		// CommonJS
 		module.exports = function (root, $) {
 			if ( ! root ) {
@@ -22,7 +22,7 @@
 			}
 
 			if ( ! $.fn.dataTable.Buttons ) {
-				require('datatables.net-buttons')(root, $);
+				require("datatables.net-buttons")(root, $);
 			}
 
 			return factory( $, root, root.document );
@@ -33,7 +33,7 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-'use strict';
+"use strict";
 var DataTable = $.fn.dataTable;
 
 
@@ -43,11 +43,11 @@ $.extend( DataTable.ext.buttons, {
 		return {
 			extend: "collection",
 			text: function ( dt ) {
-				return dt.i18n( 'buttons.colvis', 'Column visibility' );
+				return dt.i18n( "buttons.colvis", "Column visibility" );
 			},
-			className: 'buttons-colvis',
+			className: "buttons-colvis",
 			buttons: [ {
-				extend: 'columnsToggle',
+				extend: "columnsToggle",
 				columns: conf.columns,
 				columnText: conf.columnText
 			} ]
@@ -58,7 +58,7 @@ $.extend( DataTable.ext.buttons, {
 	columnsToggle: function ( dt, conf ) {
 		var columns = dt.columns( conf.columns ).indexes().map( function ( idx ) {
 			return {
-				extend: 'columnToggle',
+				extend: "columnToggle",
 				columns: idx,
 				columnText: conf.columnText
 			};
@@ -70,7 +70,7 @@ $.extend( DataTable.ext.buttons, {
 	// Single button to toggle column visibility
 	columnToggle: function ( dt, conf ) {
 		return {
-			extend: 'columnVisibility',
+			extend: "columnVisibility",
 			columns: conf.columns,
 			columnText: conf.columnText
 		};
@@ -80,7 +80,7 @@ $.extend( DataTable.ext.buttons, {
 	columnsVisibility: function ( dt, conf ) {
 		var columns = dt.columns( conf.columns ).indexes().map( function ( idx ) {
 			return {
-				extend: 'columnVisibility',
+				extend: "columnVisibility",
 				columns: idx,
 				visibility: conf.visibility,
 				columnText: conf.columnText
@@ -96,7 +96,7 @@ $.extend( DataTable.ext.buttons, {
 		text: function ( dt, button, conf ) {
 			return conf._columnText( dt, conf );
 		},
-		className: 'buttons-columnVisibility',
+		className: "buttons-columnVisibility",
 		action: function ( e, dt, button, conf ) {
 			var col = dt.columns( conf.columns );
 			var curr = col.visible();
@@ -111,12 +111,12 @@ $.extend( DataTable.ext.buttons, {
 			button.attr( "data-cv-idx", conf.columns );
 
 			dt
-				.on( 'column-visibility.dt'+conf.namespace, function (e, settings) {
-					if ( ! settings.bDestroying && settings.nTable == dt.settings()[0].nTable ) {
+				.on( "column-visibility.dt"+conf.namespace, function (e, settings) {
+					if ( ! settings.bDestroying && settings.nTable === dt.settings()[0].nTable ) {
 						that.active( dt.column( conf.columns ).visible() );
 					}
 				} )
-				.on( 'column-reorder.dt'+conf.namespace, function (e, settings, details) {
+				.on( "column-reorder.dt"+conf.namespace, function (e, settings, details) {
 					if ( dt.columns( conf.columns ).count() !== 1 ) {
 						return;
 					}
@@ -133,8 +133,8 @@ $.extend( DataTable.ext.buttons, {
 		},
 		destroy: function ( dt, button, conf ) {
 			dt
-				.off( 'column-visibility.dt'+conf.namespace )
-				.off( 'column-reorder.dt'+conf.namespace );
+				.off( "column-visibility.dt"+conf.namespace )
+				.off( "column-reorder.dt"+conf.namespace );
 		},
 
 		_columnText: function ( dt, conf ) {
@@ -159,10 +159,10 @@ $.extend( DataTable.ext.buttons, {
 
 
 	colvisRestore: {
-		className: 'buttons-colvisRestore',
+		className: "buttons-colvisRestore",
 
 		text: function ( dt ) {
-			return dt.i18n( 'buttons.colvisRestore', 'Restore visibility' );
+			return dt.i18n( "buttons.colvisRestore", "Restore visibility" );
 		},
 
 		init: function ( dt, button, conf ) {
@@ -176,7 +176,7 @@ $.extend( DataTable.ext.buttons, {
 				// Take into account that ColReorder might have disrupted our
 				// indexes
 				var idx = dt.colReorder && dt.colReorder.transpose ?
-					dt.colReorder.transpose( i, 'toOriginal' ) :
+					dt.colReorder.transpose( i, "toOriginal" ) :
 					i;
 
 				this.visible( conf._visOriginal[ idx ] );
@@ -186,7 +186,7 @@ $.extend( DataTable.ext.buttons, {
 
 
 	colvisGroup: {
-		className: 'buttons-colvisGroup',
+		className: "buttons-colvisGroup",
 
 		action: function ( e, dt, button, conf ) {
 			dt.columns( conf.show ).visible( true, false );
