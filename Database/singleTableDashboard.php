@@ -1,7 +1,5 @@
 <?php 
-	    include 'db_login.php';
-
-    
+    include 'db_login.php';
     $query = "SELECT b.*, a.Nama, a.Email, a.Phone, a.Company, a.Lokasi FROM kunjungan AS b INNER JOIN tamu AS a ON a.idTamu = b.idTamu WHERE DATE(Masuk) = CURDATE() OR Status = 'Active' OR Status = 'Booking'";
     $result = $db->query($query);
     $numRow = $result->num_rows;
@@ -34,25 +32,33 @@
         } else {
             $loc = '-';
         }
-    	echo '<tr>';
-    	echo '<td class="d-none">'.$row['idKunjungan'].'</td>';
+ ?>
+<?=
+    	'<tr>
+    	<td class="d-none">'.$row['idKunjungan'].'</td>'
+ ?>
+<?php   if ($row['Status'] == 'Booking') { ?>
+            <?= '<td>'.$row['idTamu'].' (Booking)</td>' ?>
+<?php   } else { ?>
+            <?= '<td>'.$row['idTamu'].'</td>' ?>
+<?php   } ?>
+<?=
+        '<td>'.$code.'</td>
+    	<td>'.$row['Nama'].'</td>
+        <td>'.$row['Email'].'</td>
+        <td>'.$telp.'</td>
+    	<td>'.$row['Company'].'</td>
+        <td>'.$loc.'</td>
+    	<td>'.$row['Tujuan'].'</td>
+    	<td>'.$row['Keperluan'].'</td>
+    	<td>'.$dateIn1.'</td>
+    	<td>'.$dateOut1.'</td>
+ ?>
+ <?php
         if ($row['Status'] == 'Booking') {
-            echo '<td>'.$row['idTamu'].' (Booking)</td>';
-        } else {
-            echo '<td>'.$row['idTamu'].'</td>';
-        }
-        echo '<td>'.$code.'</td>';
-    	echo '<td>'.$row['Nama'].'</td>';
-        echo '<td>'.$row['Email'].'</td>';
-        echo '<td>'.$telp.'</td>';
-    	echo '<td>'.$row['Company'].'</td>';
-        echo '<td>'.$loc.'</td>';
-    	echo '<td>'.$row['Tujuan'].'</td>';
-    	echo '<td>'.$row['Keperluan'].'</td>';
-    	echo '<td>'.$dateIn1.'</td>';
-    	echo '<td>'.$dateOut1.'</td>';
-        if ($row['Status'] == 'Booking') {
-            echo '<td><div class="dropdown show">
+ ?>
+ <?=
+                '<td><div class="dropdown show">
                     <a class="btn btn-success dropdown-toggle text-white" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
                     </a>
@@ -60,10 +66,14 @@
                         <a class="dropdown-item" data-toggle="modal" data-target="#inModalS" href="#">Check In</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#DelModalS" href="#">Delete</a>
                     </div>
-                </div>';
+                </div>'
+ ?>
+ <?php
         } else {
             if ($row['Code'] != '') {
-            echo '<td><div class="dropdown show">
+ ?>
+ <?=
+                '<td><div class="dropdown show">
                     <a class="btn btn-success dropdown-toggle text-white" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
                     </a>
@@ -71,9 +81,11 @@
                         <a class="dropdown-item" data-toggle="modal" data-target="#OutModalS" href="#">Check Out</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#DelModalS" href="#">Delete</a>
                     </div>
-                </div>';
-            } else {
-                echo '<td><div class="dropdown show">
+                </div>'
+?>
+<?php       } else { ?>
+<?=
+                '<td><div class="dropdown show">
                     <a class="btn btn-success dropdown-toggle text-white" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
                     </a>
@@ -82,17 +94,14 @@
                         <a class="dropdown-item" data-toggle="modal" data-target="#OutModalS" href="#">Check Out</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#DelModalS" href="#">Delete</a>
                     </div>
-                </div>';
+                </div>'
+ ?>
+<?php
             }
         }
-        echo '</tr>';
-    }
-
-    function testInput($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
+ ?>
+<?=     '</tr>' ?>
+<?php
     }
     $a = filter_input(INPUT_POST, 'submitCode');
     if (isset($a)) {
@@ -109,14 +118,18 @@
             $query1 = "UPDATE kartu SET id =  (SELECT idTamu FROM kunjungan WHERE idKunjungan = '$code2'), status = 'Unavailable' WHERE Code = '$code1'";
             $result = $db->query($query);
             $result1 = $db->query($query1);
-            echo "<script type='text/javascript'>
+ ?>
+<?= 
+            "<script type='text/javascript'>
             $(document).ready(function() {
             $('#CodeModalS').modal('hide');
             });
-            </script>";
-            echo "<meta http-equiv='refresh' content='0'>";
-        } else {
-            echo "<script type='text/javascript'>alert('Wrong Access Card, Please Enter The Correct Access Card!');</script>";
+            </script>
+            <meta http-equiv='refresh' content='0'>"
+ ?>
+<?php   } else { ?>
+<?=         "<script type='text/javascript'>alert('Wrong Access Card, Please Enter The Correct Access Card!');</script>" ?>
+<?php
         }
     }
     $a = filter_input(INPUT_POST, 'submitDelS');
@@ -127,12 +140,16 @@
         $result2 = $db->query($query2);
         $query = "DELETE FROM tamu WHERE idTamu = '$code1'";
         $result = $db->query($query);
-            echo "<script type='text/javascript'>
+ ?>
+<?=
+            "<script type='text/javascript'>
             $(document).ready(function() {
             $('#DelModalS').modal('hide');
             });
-            </script>";
-            echo "<meta http-equiv='refresh' content='0'>";
+            </script>
+            <meta http-equiv='refresh' content='0'>"
+ ?>
+<?php 
     }     
     $a = filter_input(INPUT_POST, 'submitOutS');
     if (isset($a)) {
@@ -141,12 +158,16 @@
         $query1 = "UPDATE kartu SET id =  '-', status = 'Available' WHERE Code = (SELECT Code FROM kunjungan WHERE idKunjungan = '$code2')";
         $result = $db->query($query1);
         $result2 = $db->query($query2);
-            echo "<script type='text/javascript'>
+ ?>
+<?= 
+            "<script type='text/javascript'>
             $(document).ready(function() {
             $('#OutModalS').modal('hide');
             });
-            </script>";
-            echo "<meta http-equiv='refresh' content='0'>";
+            </script>
+            <meta http-equiv='refresh' content='0'>"
+ ?>
+<?php 
     }    
     $a = filter_input(INPUT_POST, 'submitInS');
     if (isset($a)) {
@@ -163,14 +184,18 @@
             $query1 = "UPDATE kartu SET id =  (SELECT idTamu FROM kunjungan WHERE idKunjungan = '$code2'), status = 'Unavailable' WHERE Code = '$code1'";
             $result = $db->query($query);
             $result1 = $db->query($query1);
-            echo "<script type='text/javascript'>
+ ?>
+<?= 
+            "<script type='text/javascript'>
             $(document).ready(function() {
             $('#inModalS').modal('hide');
             });
-            </script>";
-            echo "<meta http-equiv='refresh' content='0'>";
-        } else {
-            echo "<script type='text/javascript'>alert('Wrong Access Card, Please Enter The Correct Access Card!');</script>";
+            </script>
+            <meta http-equiv='refresh' content='0'>"
+?>
+<?php   } else { ?>
+<?=         "<script type='text/javascript'>alert('Wrong Access Card, Please Enter The Correct Access Card!');</script>" ?>
+<?php
         }
     }
 
