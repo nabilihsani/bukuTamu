@@ -52,7 +52,7 @@
     	<td>'.$row['Tujuan'].'</td>
     	<td>'.$row['Keperluan'].'</td>
     	<td>'.$dateIn1.'</td>
-    	<td>'.$dateOut1.'</td>
+    	<td>'.$dateOut1.'</td>'
  ?>
  <?php
         if ($row['Status'] == 'Booking') {
